@@ -1,2 +1,2 @@
-# Avionincs
+# Avionics
 Boring name man...
