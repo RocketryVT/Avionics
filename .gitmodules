@@ -1,0 +1,18 @@
+[submodule "projects/libs/Third_Party/Fusion"]
+	path = projects/libs/Third_Party/Fusion
+	url = https://github.com/xioTechnologies/Fusion
+[submodule "projects/libs/Third_Party/libfixmath"]
+	path = projects/libs/Third_Party/libfixmath
+	url = https://github.com/PetteriAimonen/libfixmath.git
+[submodule "projects/libs/Third_Party/libfixmatrix"]
+	path = projects/libs/Third_Party/libfixmatrix
+	url = https://github.com/PetteriAimonen/libfixmatrix.git
+[submodule "projects/libs/Third_Party/FreeRTOS-Kernel"]
+	path = projects/libs/Third_Party/FreeRTOS-Kernel
+	url = https://github.com/FreeRTOS/FreeRTOS-Kernel.git
+[submodule "projects/libs/Third_Party/pico-sdk"]
+	path = projects/libs/Third_Party/pico-sdk
+	url = https://github.com/raspberrypi/pico-sdk
+[submodule "projects/libs/Third_Party/nanopb"]
+	path = projects/libs/Third_Party/nanopb
+	url = https://github.com/nanopb/nanopb.git
