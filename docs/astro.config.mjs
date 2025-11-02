@@ -6,8 +6,9 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://rocketryatvirginiatech.org/Avionics',
+  site: 'https://rocketryatvirginiatech.org',
   base: '/Avionics',
+  trailingSlash: 'ignore',
   integrations: [
       starlight({
           title: 'Rocketry@VT Avionics Documentation',
