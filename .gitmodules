@@ -28,3 +28,6 @@
 [submodule "projects/bareman_tracker"]
 	path = projects/bareman_tracker
 	url = git@github.com:RocketryVT/Bareman-Tracker.git
+[submodule "projects/ground_station"]
+	path = projects/ground_station
+	url = git@github.com:RocketryVT/Ground-Station.git
