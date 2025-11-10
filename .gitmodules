@@ -16,3 +16,6 @@
 [submodule "projects/libs/Third_Party/nanopb"]
 	path = projects/libs/Third_Party/nanopb
 	url = https://github.com/nanopb/nanopb.git
+[submodule "projects/ios_rocket_tracker"]
+	path = projects/ios_rocket_tracker
+	url = git@github.com:RocketryVT/iOS-Rocket-Tracker.git
