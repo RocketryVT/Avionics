@@ -25,3 +25,6 @@
 [submodule "projects/active_drag_system"]
 	path = projects/active_drag_system
 	url = git@github.com:RocketryVT/active-drag-system.git
+[submodule "projects/bareman_tracker"]
+	path = projects/bareman_tracker
+	url = git@github.com:RocketryVT/Bareman-Tracker.git
