@@ -1,5 +1,8 @@
 # Avionics
 
+<img width="3800" height="3800" alt="RocketryLogo_White_MaroonBackground" src="https://github.com/user-attachments/assets/2b8f0c37-6ac3-4bb0-baf4-3e040de47cc5" />
+
+
 This repository contains the avionics projects developed by the Rocketry at Virginia Tech team. We build flight computers, tracking systems, and ground support equipment for high-power rockets.
 
 ## About
