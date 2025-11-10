@@ -31,3 +31,6 @@
 [submodule "projects/ground_station"]
 	path = projects/ground_station
 	url = git@github.com:RocketryVT/Ground-Station.git
+[submodule "projects/mobile_tracker"]
+	path = projects/mobile_tracker
+	url = git@github.com:RocketryVT/Mobile-Tracker.git
