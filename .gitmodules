@@ -34,3 +34,6 @@
 [submodule "projects/mobile_tracker"]
 	path = projects/mobile_tracker
 	url = git@github.com:RocketryVT/Mobile-Tracker.git
+[submodule "projects/libs/Third_Party/CMSIS-DSP"]
+	path = projects/libs/Third_Party/CMSIS-DSP
+	url = https://github.com/ARM-software/CMSIS-DSP.git
