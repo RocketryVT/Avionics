@@ -22,7 +22,7 @@ public:
      * 
      * @param sampleFreq sample frequency in Hz
      * @param twoKp 2 * proportional gain (Kp)
-     * @param twoKi 2 * integral gain (Ki)
+     * @param twoKi 2 * integral gain (Ki) (default is 0, no integral feedback and avoids integral windup)
      */
     MahonyAHRS(float sampleFreq = 512.0f, float twoKp = (2.0f * 0.5f), float twoKi = (2.0f * 0.0f)) :
     sampleFreq(sampleFreq), twoKp(twoKp), twoKi(twoKi), q0(1.0f), q1(0.0f), q2(0.0f), q3(0.0f),
