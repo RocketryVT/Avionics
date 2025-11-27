@@ -37,3 +37,6 @@
 [submodule "projects/libs/Third_Party/CMSIS-DSP"]
 	path = projects/libs/Third_Party/CMSIS-DSP
 	url = https://github.com/ARM-software/CMSIS-DSP.git
+[submodule "projects/pico_examples"]
+	path = projects/pico_examples
+	url = git@github.com:RocketryVT/pico-examples.git
