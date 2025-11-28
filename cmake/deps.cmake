@@ -16,6 +16,12 @@ if (NOT DEFINED LIBS_ROOT)
     set(LIBS_ROOT "${PROJECTS_ROOT}/libs" CACHE PATH "Root of shared third-party libraries")
 endif()
 
+# Rocketry At Virginia Tech libraries
+
+if (NOT DEFINED PICO_LOGGER_PATH)
+    set(PICO_LOGGER_PATH "${LIBS_ROOT}/pico-logger" CACHE PATH "Path to pico-logger")
+endif()
+
 # Third-party components used by the Pico examples; override if you keep libs
 # in a nonstandard location.
 if (NOT DEFINED PICO_SDK_PATH)
@@ -47,6 +53,14 @@ endif()
 
 if (NOT DEFINED FUSION_PATH)
     set(FUSION_PATH "${LIBS_ROOT}/Third_Party/Fusion" CACHE PATH "Path to Fusion")
+endif()
+
+if (NOT DEFINED EIGEN_PATH)
+    set(EIGEN_PATH "${LIBS_ROOT}/Third_Party/eigen" CACHE PATH "Path to Eigen")
+endif()
+
+if (NOT DEFINED LIBFIXKALMAN_PATH)
+    set(LIBFIXKALMAN_PATH "${LIBS_ROOT}/Third_Party/libfixkalman" CACHE PATH "Path to libfixkalman")
 endif()
 
 if (NOT DEFINED LIBFIXMATH_PATH)

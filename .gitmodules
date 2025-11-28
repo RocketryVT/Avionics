@@ -40,3 +40,12 @@
 [submodule "projects/pico_examples"]
 	path = projects/pico_examples
 	url = git@github.com:RocketryVT/pico-examples.git
+[submodule "projects/libs/Third_Party/libfixkalman"]
+	path = projects/libs/Third_Party/libfixkalman
+	url = https://github.com/sunsided/libfixkalman.git
+[submodule "projects/libs/Third_Party/eigen"]
+	path = projects/libs/Third_Party/eigen
+	url = https://gitlab.com/libeigen/eigen.git
+[submodule "projects/libs/pico-logger"]
+	path = projects/libs/pico-logger
+	url = https://github.com/RocketryVT/pico-logger.git
