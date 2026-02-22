@@ -1,0 +1,51 @@
+[submodule "projects/libs/Third_Party/Fusion"]
+	path = projects/libs/Third_Party/Fusion
+	url = https://github.com/xioTechnologies/Fusion
+[submodule "projects/libs/Third_Party/libfixmath"]
+	path = projects/libs/Third_Party/libfixmath
+	url = https://github.com/PetteriAimonen/libfixmath.git
+[submodule "projects/libs/Third_Party/libfixmatrix"]
+	path = projects/libs/Third_Party/libfixmatrix
+	url = https://github.com/PetteriAimonen/libfixmatrix.git
+[submodule "projects/libs/Third_Party/pico-sdk"]
+	path = projects/libs/Third_Party/pico-sdk
+	url = https://github.com/raspberrypi/pico-sdk
+[submodule "projects/libs/Third_Party/nanopb"]
+	path = projects/libs/Third_Party/nanopb
+	url = https://github.com/nanopb/nanopb.git
+[submodule "projects/ios_rocket_tracker"]
+	path = projects/ios_rocket_tracker
+	url = git@github.com:RocketryVT/iOS-Rocket-Tracker.git
+[submodule "projects/android_rocket_tracker"]
+	path = projects/android_rocket_tracker
+	url = git@github.com:RocketryVT/Android-Rocket-Tracker.git
+[submodule "projects/active_drag_system"]
+	path = projects/active_drag_system
+	url = git@github.com:RocketryVT/active-drag-system.git
+[submodule "projects/bareman_tracker"]
+	path = projects/bareman_tracker
+	url = git@github.com:RocketryVT/Bareman-Tracker.git
+[submodule "projects/ground_station"]
+	path = projects/ground_station
+	url = git@github.com:RocketryVT/Ground-Station.git
+[submodule "projects/mobile_tracker"]
+	path = projects/mobile_tracker
+	url = git@github.com:RocketryVT/Mobile-Tracker.git
+[submodule "projects/libs/Third_Party/CMSIS-DSP"]
+	path = projects/libs/Third_Party/CMSIS-DSP
+	url = https://github.com/ARM-software/CMSIS-DSP.git
+[submodule "projects/pico_examples"]
+	path = projects/pico_examples
+	url = git@github.com:RocketryVT/pico-examples.git
+[submodule "projects/libs/Third_Party/libfixkalman"]
+	path = projects/libs/Third_Party/libfixkalman
+	url = https://github.com/sunsided/libfixkalman.git
+[submodule "projects/libs/Third_Party/eigen"]
+	path = projects/libs/Third_Party/eigen
+	url = https://gitlab.com/libeigen/eigen.git
+[submodule "projects/libs/pico-logger"]
+	path = projects/libs/pico-logger
+	url = https://github.com/RocketryVT/pico-logger.git
+[submodule "FreeRTOS-Kernel-Modified"]
+	path = projects/libs/Third_Party/FreeRTOS-Kernel
+	url = https://github.com/raspberrypi/FreeRTOS-Kernel.git
