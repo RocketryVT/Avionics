@@ -1,0 +1,8 @@
+# add_subdirectory(MEKF)
+# add_subdirectory(QIEKF)
+# add_subdirectory(Third_Party)
+add_subdirectory(lora)
+# add_subdirectory(packets)
+# add_subdirectory(pico-logger)
+add_subdirectory(gps)
+add_subdirectory(math_utils)
