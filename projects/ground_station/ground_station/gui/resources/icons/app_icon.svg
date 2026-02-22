@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="128" cy="128" r="120" fill="#1e3a8a" stroke="#3b82f6" stroke-width="4"/>
+  
+  <!-- Rocket body -->
+  <rect x="110" y="80" width="36" height="100" rx="18" fill="#dc2626"/>
+  
+  <!-- Rocket tip -->
+  <polygon points="128,60 140,80 116,80" fill="#fbbf24"/>
+  
+  <!-- Rocket flames -->
+  <polygon points="115,180 128,200 141,180" fill="#f97316"/>
+  <polygon points="120,185 128,195 136,185" fill="#fbbf24"/>
+  
+  <!-- Rocket fins -->
+  <polygon points="110,140 95,160 110,160" fill="#374151"/>
+  <polygon points="146,140 161,160 146,160" fill="#374151"/>
+  
+  <!-- Satellite dish (ground station) -->
+  <ellipse cx="80" cy="180" rx="25" ry="8" fill="#6b7280"/>
+  <rect x="77" y="180" width="6" height="20" fill="#374151"/>
+  <rect x="70" y="200" width="20" height="4" rx="2" fill="#374151"/>
+  
+  <!-- Radio waves -->
+  <path d="M 105 170 Q 115 165 125 170" stroke="#10b981" stroke-width="2" fill="none"/>
+  <path d="M 107 175 Q 115 172 123 175" stroke="#10b981" stroke-width="2" fill="none"/>
+  <path d="M 109 180 Q 115 178 121 180" stroke="#10b981" stroke-width="2" fill="none"/>
+  
+  <!-- Stars -->
+  <circle cx="60" cy="80" r="2" fill="#fbbf24"/>
+  <circle cx="200" cy="60" r="2" fill="#fbbf24"/>
+  <circle cx="180" cy="100" r="2" fill="#fbbf24"/>
+  <circle cx="70" cy="120" r="2" fill="#fbbf24"/>
+  <circle cx="190" cy="180" r="2" fill="#fbbf24"/>
+</svg>
