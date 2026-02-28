@@ -66,3 +66,6 @@
 	path = projects/libs/Third_Party/nanopb
 	url = https://github.com/nanopb/nanopb.git
 	branch = master
+[submodule "projects/libs/Third_Party/ubxlib"]
+	path = projects/libs/Third_Party/ubxlib
+	url = https://github.com/u-blox/ubxlib.git

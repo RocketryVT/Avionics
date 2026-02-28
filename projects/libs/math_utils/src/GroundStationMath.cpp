@@ -57,10 +57,9 @@ double GroundStationMath::calculateAzimuth(const Location &loc1,
 }
 
 // Calculates elevation angle
-double GroundStationMath::calculateElevation(const Location &station,
-                                             const Location &rocket) {
-  double groundDist = haversineDistance(station, rocket);
-  double altDiff = rocket.altitude - station.altitude;
+double GroundStationMath::calculateElevation(const Location &loc1, const Location &loc2) {
+  double groundDist = haversineDistance(loc1, loc2);
+  double altDiff = loc2.altitude - loc1.altitude;
 
   // angle = atan(opposite / adjacent)
   return toDegrees(std::atan2(altDiff, groundDist));

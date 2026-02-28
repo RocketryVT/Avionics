@@ -83,4 +83,24 @@ if (NOT DEFINED NANOPB_PATH)
     set(NANOPB_PATH "${LIBS_ROOT}/Third_Party/nanopb" CACHE PATH "Path to nanopb")
 endif()
 
+if (NOT DEFINED UBXLIB_PATH)
+    set(UBXLIB_PATH "${LIBS_ROOT}/Third_Party/ubxlib" CACHE PATH "Path to ubxlib")
+endif()
+
+
+# LoRa drivers (Semtech LR11XX + HAL)
+if (NOT DEFINED LORA_ROOT)
+    set(LORA_ROOT "${LIBS_ROOT}/lora" CACHE PATH "Path to LoRa drivers")
+endif()
+
+# GPS NMEA parser
+if (NOT DEFINED GPS_ROOT)
+    set(GPS_ROOT "${LIBS_ROOT}/gps" CACHE PATH "Path to GPS library")
+endif()
+
+# Ground-station math (haversine, azimuth, elevation)
+if (NOT DEFINED MATH_UTILS_ROOT)
+    set(MATH_UTILS_ROOT "${LIBS_ROOT}/math_utils" CACHE PATH "Path to math_utils library")
+endif()
+
 unset(_deps_repo_root)

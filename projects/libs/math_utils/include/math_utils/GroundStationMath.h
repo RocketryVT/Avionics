@@ -21,8 +21,7 @@ public:
   static double calculateAzimuth(const Location &loc1, const Location &loc2);
 
   // Calculates elevation angle (0-90 degrees)
-  static double calculateElevation(const Location &station,
-                                   const Location &rocket);
+  static double calculateElevation(const Location &loc1, const Location &loc2);
 
 private:
   static double toRadians(double degrees);
