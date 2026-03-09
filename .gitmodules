@@ -69,3 +69,6 @@
 [submodule "projects/libs/Third_Party/ubxlib"]
 	path = projects/libs/Third_Party/ubxlib
 	url = https://github.com/u-blox/ubxlib.git
+[submodule "projects/rp2350_active_drag_system"]
+	path = projects/rp2350_active_drag_system
+	url = git@github.com:RocketryVT/RP2350-Active-Drag-System.git
