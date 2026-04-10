@@ -17,9 +17,10 @@
 #include "lr11xx_hal.h"
 #include "lr11xx_hal_context.h"
 
-#include "FreeRTOS.h"
+// lr11xx_hal_context.h already pulls in FreeRTOS.h and semphr.h (required
+// for SemaphoreHandle_t / StaticSemaphore_t in the context struct).
+// task.h is the only additional header needed here.
 #include "task.h"
-#include "semphr.h"
 
 #include "pico/time.h"
 #include "hardware/spi.h"
@@ -63,8 +64,8 @@ void lr11xx_hal_init( lr11xx_hal_context_t* ctx )
     configASSERT( ctx != NULL );
     configASSERT( ctx->spi != NULL );
 
-    // Create the per-context SPI mutex (static allocation — no heap).
-    ctx->_mutex = xSemaphoreCreateMutexStatic( &ctx->_mutex_buf );
+    // Create the per-context SPI mutex.
+    ctx->_mutex = xSemaphoreCreateMutex();
     configASSERT( ctx->_mutex );
 
     // SPI peripheral
@@ -127,8 +128,8 @@ lr11xx_hal_status_t lr11xx_hal_write( const void*    context,
 
 // ─── HAL Read ─────────────────────────────────────────────────────────────────
 // Two-step operation (per hal.h contract):
-//   Step 1: NSS↓ → send command → NSS↑
-//   Step 2: NSS↓ → discard dummy byte → read data → NSS↑
+//   Step 1: NSS↓ -> send command -> NSS↑
+//   Step 2: NSS↓ -> discard dummy byte -> read data -> NSS↑
 // MOSI must be 0x00 (NOP) throughout the read phase.
 
 lr11xx_hal_status_t lr11xx_hal_read( const void*    context,
@@ -222,7 +223,7 @@ lr11xx_hal_status_t lr11xx_hal_reset( const void* context )
 }
 
 // ─── HAL Wakeup ───────────────────────────────────────────────────────────────
-// Per datasheet §4.3: NSS↓ → hold 100 µs → NSS↑ → wait BUSY↓.
+// Per datasheet §4.3: NSS↓ -> hold 100 µs -> NSS↑ -> wait BUSY↓.
 // The 100 µs pulse must be precise, so sleep_us() is kept here.
 
 lr11xx_hal_status_t lr11xx_hal_wakeup( const void* context )

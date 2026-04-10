@@ -1,22 +1,81 @@
-# LoRa drivers — library CMakeLists
+# LoRa / Radio drivers — library CMakeLists
 #
-# Include this via add_subdirectory() from your project after pico_sdk_init().
+# Include via add_subdirectory() from a project after pico_sdk_init().
 # Do NOT add cmake_minimum_required / project / pico_sdk_init here.
 #
 # Targets exposed to consumers:
 #
-#   lr11xx        — Semtech LR11XX C driver + Pico SPI HAL compiled together.
-#                   Link this to use the low-level lr11xx_*.h API.
+#   radio_hal   — INTERFACE: RadioLib 7.x (local) + PicoHal.h + SX1276Radio.hpp
+#                 + RF69Radio.hpp.  Link to use any RadioLib-backed radio.
 #
-#   sx1276_hal    — INTERFACE target: RadioLib (fetched) + PicoHal.h headers.
-#                   Link this to use RadioLib's SX127x (and other) radios.
+#   lr11xx      — Semtech LR11XX C driver + Pico SPI HAL (static library).
 
-# ── LR11XX ────────────────────────────────────────────────────────────────────
-# Semtech's vendor driver is already a proper static library target.
+# ── RadioLib (local copy) ─────────────────────────────────────────────────────
+# Expects RADIOLIB_PATH to be set (done in deps.cmake).
+# Fall back to a path relative to the avionics root if not set.
+if (NOT DEFINED RADIOLIB_PATH)
+    get_filename_component(_lora_avionics_root
+        "${CMAKE_CURRENT_LIST_DIR}/../../.." ABSOLUTE)
+    set(RADIOLIB_PATH "${_lora_avionics_root}/RadioLib-7.6.0")
+    unset(_lora_avionics_root)
+endif()
+
+if (NOT EXISTS "${RADIOLIB_PATH}/CMakeLists.txt")
+    message(FATAL_ERROR
+        "RadioLib not found at '${RADIOLIB_PATH}'.\n"
+        "Set RADIOLIB_PATH to the RadioLib-7.x source directory, or place "
+        "RadioLib-7.6.0/ next to the Avionics repository root.")
+endif()
+
+set(RADIOLIB_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+set(RADIOLIB_BUILD_TESTS    OFF CACHE BOOL "" FORCE)
+
+add_subdirectory(${RADIOLIB_PATH} ${CMAKE_CURRENT_BINARY_DIR}/radiolib EXCLUDE_FROM_ALL)
+
+# ── radio_hal INTERFACE target ────────────────────────────────────────────────
+# Consumers get:
+#   • RadioLib headers (via the RadioLib target)
+#   • hal/PicoHal.h               — Pico SDK implementation of RadioLibHal
+#   • radio/Radio.hpp             — radio::IRadio + radio::Packet
+#   • radio/SpiDevice.hpp         — radio::SpiDevice (shared SPI helper)
+#   • radio/sx1276/SX1276.hpp     — radio::sx1276::SX1276 (RadioLib wrapper)
+#   • radio/rf69/RF69.hpp         — radio::rf69::RF69    (RadioLib wrapper)
+add_library(radio_hal INTERFACE)
+
+target_include_directories(radio_hal INTERFACE
+    ${CMAKE_CURRENT_SOURCE_DIR}/hal    # PicoHal.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/radio  # Radio.hpp, SpiDevice.hpp, sx1276/, rf69/
+)
+
+target_link_libraries(radio_hal INTERFACE
+    RadioLib
+    pico_stdlib
+    hardware_spi
+    hardware_gpio
+)
+
+# ── sx1231 static library (native driver, no RadioLib) ────────────────────────
+# Provides radio::sx1231::SX1231.  Link alongside radio_hal (for Radio.hpp /
+# SpiDevice.hpp) or standalone — both header sets are in radio/.
+add_library(sx1231 STATIC
+    radio/sx1231/SX1231.cpp
+)
+
+target_include_directories(sx1231 PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/radio  # Radio.hpp, SpiDevice.hpp, sx1231/SX1231.hpp
+)
+
+target_link_libraries(sx1231 PUBLIC
+    pico_stdlib
+    hardware_spi
+    hardware_gpio
+)
+
+target_compile_features(sx1231 PUBLIC cxx_std_23)
+
+# ── LR11XX (Semtech vendor driver) ────────────────────────────────────────────
 add_subdirectory(lr11xx_driver)
 
-# Wrap the vendor driver + Pico HAL into one convenience target so callers
-# only need: target_link_libraries(my_target lr11xx)
 add_library(lr11xx STATIC lr11xx_hal.c)
 
 target_include_directories(lr11xx PUBLIC
@@ -29,17 +88,21 @@ target_link_libraries(lr11xx PUBLIC
     pico_stdlib
     hardware_spi
     hardware_gpio
-    pico_time          # make_timeout_time_ms / time_reached used in the HAL
+    pico_time
 )
 
-# If FreeRTOS-Kernel is available (i.e. the consuming project has already
-# called FreeRTOS_Kernel_import.cmake), link it so the HAL can call vTaskDelay
-# and use semaphores.  The consuming project must ensure FreeRTOSConfig.h is
-# on the compile path for lr11xx (see target_include_directories in the
-# project's own src/CMakeLists.txt).
-if(TARGET FreeRTOS-Kernel)
+if (TARGET FreeRTOS-Kernel)
     target_link_libraries(lr11xx PUBLIC FreeRTOS-Kernel)
+    # FreeRTOS-Kernel-Core injects freertos_sdk_config.h into every Pico SDK
+    # header via PICO_CONFIG_RTOS_ADAPTER_HEADER, which then #includes
+    # "FreeRTOSConfig.h".  Propagate the config directory so it is findable
+    # when lr11xx is compiled as a standalone static library.
+    if (DEFINED FREERTOS_CONFIG_FILE_DIRECTORY)
+        target_include_directories(lr11xx PUBLIC ${FREERTOS_CONFIG_FILE_DIRECTORY})
+    else()
+        message(WARNING
+            "lr11xx: FreeRTOS-Kernel is linked but FREERTOS_CONFIG_FILE_DIRECTORY "
+            "is not set. Set it to the directory containing FreeRTOSConfig.h before "
+            "add_subdirectory(lora).")
+    endif()
 endif()
-
-# ── SX1276 / RadioLib ─────────────────────────────────────────────────────────
-add_subdirectory(sx1276)

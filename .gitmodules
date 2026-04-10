@@ -72,3 +72,7 @@
 [submodule "projects/rp2350_active_drag_system"]
 	path = projects/rp2350_active_drag_system
 	url = git@github.com:RocketryVT/RP2350-Active-Drag-System.git
+[submodule "projects/rocket-cam"]
+	path = projects/rocket-cam
+	url = https://github.com/RocketryVT/rocket-cam
+	branch = main

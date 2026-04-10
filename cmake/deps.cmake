@@ -88,14 +88,32 @@ if (NOT DEFINED UBXLIB_PATH)
 endif()
 
 
-# LoRa drivers (Semtech LR11XX + HAL)
+# LoRa / radio drivers (Semtech LR11XX + RadioLib-backed SX1276 / RF69)
 if (NOT DEFINED LORA_ROOT)
     set(LORA_ROOT "${LIBS_ROOT}/lora" CACHE PATH "Path to LoRa drivers")
+endif()
+
+# Local RadioLib source tree (7.x).  The lora CMakeLists.txt falls back to
+# ${AVIONICS_ROOT}/RadioLib-7.6.0 automatically, but setting it here makes
+# the path explicit and lets projects override via -DRADIOLIB_PATH=...
+if (NOT DEFINED RADIOLIB_PATH)
+    set(RADIOLIB_PATH "${AVIONICS_ROOT}/RadioLib-7.6.0"
+        CACHE PATH "Path to local RadioLib 7.x source")
 endif()
 
 # GPS NMEA parser
 if (NOT DEFINED GPS_ROOT)
     set(GPS_ROOT "${LIBS_ROOT}/gps" CACHE PATH "Path to GPS library")
+endif()
+
+# LIS3MDL magnetometer driver
+if (NOT DEFINED LIS3MDL_ROOT)
+    set(LIS3MDL_ROOT "${LIBS_ROOT}/lis3mdl" CACHE PATH "Path to LIS3MDL driver")
+endif()
+
+# ISM330DLC IMU driver
+if (NOT DEFINED ISM330DLC_ROOT)
+    set(ISM330DLC_ROOT "${LIBS_ROOT}/ism330dlc" CACHE PATH "Path to ISM330DLC driver")
 endif()
 
 # Ground-station math (haversine, azimuth, elevation)

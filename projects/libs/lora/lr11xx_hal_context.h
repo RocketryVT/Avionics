@@ -43,8 +43,7 @@ typedef struct lr11xx_hal_context_s
     uint        pin_nreset; ///< GPIO: NRESET (active-low output)
 
     // ── Internal — initialised by lr11xx_hal_init(); do not modify ────────────
-    SemaphoreHandle_t _mutex;      ///< SPI bus mutex
-    StaticSemaphore_t _mutex_buf;  ///< Static storage backing the mutex
+    SemaphoreHandle_t _mutex;      ///< SPI bus mutex (dynamic allocation)
 } lr11xx_hal_context_t;
 
 // ── Convenience initialiser ───────────────────────────────────────────────────
@@ -56,4 +55,4 @@ typedef struct lr11xx_hal_context_s
 //       spi0, 8000000, 6, 4, 7, 5, 0, 1 );
 //
 #define LR11XX_HAL_CONTEXT_INIT( _spi, _hz, _sck, _mosi, _miso, _nss, _busy, _nreset ) \
-    { (_spi), (_hz), (_sck), (_mosi), (_miso), (_nss), (_busy), (_nreset), NULL, {{0}} }
+    { (_spi), (_hz), (_sck), (_mosi), (_miso), (_nss), (_busy), (_nreset), NULL }
