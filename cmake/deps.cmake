@@ -94,10 +94,10 @@ if (NOT DEFINED LORA_ROOT)
 endif()
 
 # Local RadioLib source tree (7.x).  The lora CMakeLists.txt falls back to
-# ${AVIONICS_ROOT}/RadioLib-7.6.0 automatically, but setting it here makes
+# ${AVIONICS_ROOT}/RadioLib-7.7.1 automatically, but setting it here makes
 # the path explicit and lets projects override via -DRADIOLIB_PATH=...
 if (NOT DEFINED RADIOLIB_PATH)
-    set(RADIOLIB_PATH "${AVIONICS_ROOT}/RadioLib-7.6.0"
+    set(RADIOLIB_PATH "${AVIONICS_ROOT}/RadioLib-7.7.1"
         CACHE PATH "Path to local RadioLib 7.x source")
 endif()
 
