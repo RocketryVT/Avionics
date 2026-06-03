@@ -115,7 +115,7 @@ struct Sample {
 class Device {
 public:
     static constexpr uint8_t kDefaultAddress = 0x6A;
-    static constexpr uint8_t kWhoAmIExpected = 0x6A;
+    static constexpr uint8_t kWhoAmIExpected = 0x6B;  // ISM330DHCX (successor, same register map)
 
     explicit Device(Transport transport, uint8_t device_address = kDefaultAddress);
 

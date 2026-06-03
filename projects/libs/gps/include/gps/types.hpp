@@ -202,6 +202,8 @@ struct Diagnostics {
     uint32_t ubx_frames     = 0;  // UBX frames successfully verified
     uint32_t ubx_pvt        = 0;  // NAV-PVT messages decoded
     uint32_t ubx_hp         = 0;  // NAV-HPPOSLLH messages decoded
+    uint32_t ubx_dop        = 0;  // NAV-DOP messages decoded
+    uint32_t ubx_odo        = 0;  // NAV-ODO messages decoded
     uint32_t ubx_ack        = 0;  // ACK-ACK responses received
     uint32_t ubx_nak        = 0;  // ACK-NAK responses received
     uint32_t nmea_good      = 0;  // NMEA sentences with valid checksum

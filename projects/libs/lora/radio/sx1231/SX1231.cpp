@@ -6,7 +6,7 @@
 
 namespace radio::sx1231 {
 
-// ── Private helpers ───────────────────────────────────────────────────────────
+// -- Private helpers -----------------------------------------------------------
 
 void SX1231::set_mode( uint8_t mode )
 {
@@ -33,7 +33,7 @@ void SX1231::clear_irq_flags()
     spi_dev_.write_reg( Reg::IrqFlags2, 0xFF );
 }
 
-// ── apply_config ──────────────────────────────────────────────────────────────
+// -- apply_config --------------------------------------------------------------
 
 Err SX1231::apply_config()
 {
@@ -98,7 +98,7 @@ Err SX1231::apply_config()
     return Err::Ok;
 }
 
-// ── IRadio::begin ─────────────────────────────────────────────────────────────
+// -- IRadio::begin -------------------------------------------------------------
 
 int SX1231::begin()
 {
@@ -129,7 +129,7 @@ int SX1231::begin()
     return static_cast<int>( apply_config() );
 }
 
-// ── IRadio::start_receive ─────────────────────────────────────────────────────
+// -- IRadio::start_receive -----------------------------------------------------
 
 void SX1231::start_receive()
 {
@@ -147,7 +147,7 @@ void SX1231::start_receive()
     set_mode( kModeRx );
 }
 
-// ── IRadio::read_packet ───────────────────────────────────────────────────────
+// -- IRadio::read_packet -------------------------------------------------------
 
 int SX1231::read_packet( radio::Packet& pkt )
 {
@@ -169,7 +169,7 @@ int SX1231::read_packet( radio::Packet& pkt )
     return static_cast<int>( Err::Ok );
 }
 
-// ── Extended API ──────────────────────────────────────────────────────────────
+// -- Extended API --------------------------------------------------------------
 
 std::expected<void, Err> SX1231::set_frequency( float mhz )
 {

@@ -160,6 +160,22 @@ public:
         return n;
     }
 
+    // Poll transport and route bytes to the UBX parser only.
+    // Use this when the module is configured for UBX output only.
+    std::size_t poll_ubx_only() noexcept {
+        uint8_t buf[READ_CHUNK];
+        const std::size_t n = transport_.read(buf, sizeof(buf));
+        for (std::size_t i = 0; i < n; ++i)
+            ubx_.feed(buf[i]);
+        return n;
+    }
+
+    // Read raw bytes from the transport into caller-supplied buffer.
+    // Returns the number of bytes read.  Does not feed any parser.
+    std::size_t read_raw(uint8_t* buf, std::size_t len) noexcept {
+        return transport_.read(buf, len);
+    }
+
     // Feed a single byte — route to both parsers; each discards what it doesn't own.
     void feed(uint8_t b) noexcept {
         nmea_.feed(b);

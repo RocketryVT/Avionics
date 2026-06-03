@@ -18,6 +18,18 @@
 //   len_lo len_hi    payload length, little-endian uint16
 //   [ payload ]      0..N bytes
 //   ck_a  ck_b       Fletcher-8 checksum over class+id+len+payload
+//
+// Generation 9+ (NEO-M9N, ZED-F9P, …) uses CFG-VALSET / CFG-VALGET for all
+// configuration.  Use the raw_valset_u8 / raw_valset_u16 / raw_valget builders
+// or the named wrappers that call them.
+//
+// CFG-VALSET (0x06 0x8A) payload:
+//   version(1)  layers(1)  reserved(2)  key(4 LE)  value(N)
+//   layers byte: 0x01 = RAM, 0x02 = BBR, 0x04 = Flash
+//
+// CFG-VALGET (0x06 0x8B) payload:
+//   version(1)  layer(1)  position(2)  key(4 LE)
+//   layer byte: 0x00 = RAM, 0x01 = BBR, 0x02 = Flash
 
 #include <array>
 #include <cstddef>
@@ -26,6 +38,30 @@
 #include "types.hpp"
 
 namespace gps {
+
+// -- CFG-VALSET / CFG-VALGET layer selectors ----------------------------------
+// Defined in namespace gps (not gps::Ubx) so call sites write gps::ValLayer::RAM.
+
+// Bitmask for CFG-VALSET layers (may be OR'd):
+//   RAM   = 0x01  — takes effect immediately, lost on power-cycle
+//   BBR   = 0x02  — battery-backed RAM, survives soft reset
+//   Flash = 0x04  — non-volatile, survives power-cycle
+enum class ValLayer : uint8_t {
+    RAM   = 0x01,
+    BBR   = 0x02,
+    Flash = 0x04,
+};
+constexpr ValLayer operator|(ValLayer a, ValLayer b) noexcept {
+    return static_cast<ValLayer>(static_cast<uint8_t>(a) | static_cast<uint8_t>(b));
+}
+
+// Layer selector for CFG-VALGET:
+//   RAM   = 0x00  BBR = 0x01  Flash = 0x02
+enum class ValGetLayer : uint8_t {
+    RAM   = 0x00,
+    BBR   = 0x01,
+    Flash = 0x02,
+};
 
 // -- UbxFrame -----------------------------------------------------------------
 // Fixed-size buffer for one outgoing UBX command.
@@ -156,6 +192,75 @@ inline void end(UbxFrame& f, std::size_t len_idx) noexcept {
     return f;
 }
 
+// --- CFG-NAV5 (0x06 0x24) — navigation engine settings ----------------------
+// Sets the dynamic platform model.
+// Only the dynModel byte and its mask bit are set; all other fields are left
+// at their current module values (mask = 0x0001 → apply dynModel only).
+//
+// Common dynModel values:
+//   0 = portable  2 = stationary  3 = pedestrian  4 = automotive
+//   5 = sea       6 = airborne <1g  7 = airborne <2g  8 = airborne <4g
+[[nodiscard]] inline UbxFrame cfg_nav5_dyn_model(uint8_t dyn_model) noexcept
+{
+    UbxFrame f;
+    const auto li = detail::begin(f, 0x06, 0x24);
+    detail::append_u16le(f, 0x0001);    // mask — apply dynModel only
+    detail::append(f, dyn_model);       // dynModel
+    // remaining 34 payload bytes zeroed (ignored due to mask)
+    for (int i = 0; i < 34; ++i) detail::append(f, 0x00);
+    detail::end(f, li);
+    return f;
+}
+
+// --- CFG-GNSS (0x06 0x3E) — GNSS constellation configuration ----------------
+// Enables all major constellations: GPS, SBAS, Galileo, BeiDou, QZSS, GLONASS.
+// Channel counts are representative defaults for the NEO-M9N (72 channels).
+// flags bits[16:0] = 0x01 (enable) | sigCfgMask shifted to bits[28:16].
+//
+// sigCfgMask per constellation (bits 28:16 of flags field):
+//   GPS     0x01 → L1C/A
+//   SBAS    0x01 → L1C/A
+//   Galileo 0x01 → E1
+//   BeiDou  0x01 → B1I
+//   QZSS    0x05 → L1C/A + L1S
+//   GLONASS 0x01 → L1OF
+[[nodiscard]] inline UbxFrame cfg_gnss_all() noexcept
+{
+    UbxFrame f;
+    const auto li = detail::begin(f, 0x06, 0x3E);
+
+    // Header: msgVer=0, numTrkChHw=0(read-only, ignored), numTrkChUse=0xFF(use all), numConfigBlocks=6
+    detail::append(f, 0x00);   // msgVer
+    detail::append(f, 0x00);   // numTrkChHw (ignored on write)
+    detail::append(f, 0xFF);   // numTrkChUse — use all available channels
+    detail::append(f, 0x06);   // numConfigBlocks
+
+    // Helper lambda: one 8-byte config block.
+    // gnssId, resTrkCh (min channels reserved), maxTrkCh, reserved, flags(u32le)
+    auto block = [&](uint8_t gnss_id, uint8_t res_ch, uint8_t max_ch,
+                     uint32_t flags) {
+        detail::append(f, gnss_id);
+        detail::append(f, res_ch);
+        detail::append(f, max_ch);
+        detail::append(f, 0x00);   // reserved1
+        detail::append_u32le(f, flags);
+    };
+
+    // flags = enable(bit0) | sigCfgMask(bits 28:16)
+    // sigCfgMask is OR'd into the upper 16 bits shifted left 16 + bit 16 offset
+    // Encoding: bits[28:16] hold the signal config; bit 0 = enable.
+    // Use (sigCfgMask << 16) | 0x01.
+    block(0, 8,  16, (0x01u << 16) | 0x01u);   // GPS      — L1C/A
+    block(1, 1,   3, (0x01u << 16) | 0x01u);   // SBAS     — L1C/A
+    block(2, 4,   8, (0x01u << 16) | 0x01u);   // Galileo  — E1
+    block(3, 8,  16, (0x01u << 16) | 0x01u);   // BeiDou   — B1I
+    block(5, 0,   3, (0x05u << 16) | 0x01u);   // QZSS     — L1C/A + L1S
+    block(6, 8,  14, (0x01u << 16) | 0x01u);   // GLONASS  — L1OF
+
+    detail::end(f, li);
+    return f;
+}
+
 // --- CFG-RST (0x06 0x04) -----------------------------------------------------
 // Reset the receiver.
 //   nav_bb_mask : 0x0000 = hot start, 0x0001 = warm start, 0xFFFF = cold start
@@ -227,6 +332,187 @@ inline void end(UbxFrame& f, std::size_t len_idx) noexcept {
         cfg_msg(0xF0, 0x01, port, 0),   // GLL
         cfg_msg(0xF0, 0x05, port, 0),   // VTG
     }};
+}
+
+// =============================================================================
+// CFG-VALSET / CFG-VALGET builders (Generation 9+)
+// ValLayer / ValGetLayer are defined in namespace gps above.
+// =============================================================================
+
+// --- CFG-VALSET (0x06 0x8A) — set one 1-byte key/value pair ------------------
+[[nodiscard]] inline UbxFrame raw_valset_u8(uint32_t key,
+                                            uint8_t  value,
+                                            ValLayer layers) noexcept
+{
+    UbxFrame f;
+    const auto li = detail::begin(f, 0x06, 0x8A);
+    detail::append(f, 0x01);                              // version
+    detail::append(f, static_cast<uint8_t>(layers));     // layers bitmask
+    detail::append(f, 0x00); detail::append(f, 0x00);    // reserved
+    detail::append_u32le(f, key);
+    detail::append(f, value);
+    detail::end(f, li);
+    return f;
+}
+
+// --- CFG-VALSET (0x06 0x8A) — set one 2-byte (U2) key/value pair -------------
+[[nodiscard]] inline UbxFrame raw_valset_u16(uint32_t key,
+                                             uint16_t value,
+                                             ValLayer layers) noexcept
+{
+    UbxFrame f;
+    const auto li = detail::begin(f, 0x06, 0x8A);
+    detail::append(f, 0x01);
+    detail::append(f, static_cast<uint8_t>(layers));
+    detail::append(f, 0x00); detail::append(f, 0x00);
+    detail::append_u32le(f, key);
+    detail::append_u16le(f, value);
+    detail::end(f, li);
+    return f;
+}
+
+// --- CFG-VALGET (0x06 0x8B) — query one key ----------------------------------
+[[nodiscard]] inline UbxFrame raw_valget(uint32_t     key,
+                                         ValGetLayer  layer = ValGetLayer::RAM) noexcept
+{
+    UbxFrame f;
+    const auto li = detail::begin(f, 0x06, 0x8B);
+    detail::append(f, 0x00);                              // version
+    detail::append(f, static_cast<uint8_t>(layer));      // layer
+    detail::append(f, 0x00); detail::append(f, 0x00);    // position
+    detail::append_u32le(f, key);
+    detail::end(f, li);
+    return f;
+}
+
+// =============================================================================
+// Named CFG-VALSET wrappers — NEO-M9N / ZED-F9P configuration keys
+// All default to RAM|BBR|Flash so one call persists across power cycles.
+// Pass a different `layers` to target only RAM (for runtime-only changes).
+// =============================================================================
+
+// --- CFG-MSGOUT-UBX_NAV_PVT_UART1 (key 0x20910007) --------------------------
+// rate=1 → one NAV-PVT per navigation solution on UART1
+[[nodiscard]] inline UbxFrame valset_nav_pvt_uart1(
+    uint8_t rate = 1,
+    ValLayer layers = ValLayer::RAM | ValLayer::BBR | ValLayer::Flash) noexcept
+{
+    return raw_valset_u8(0x20910007u, rate, layers);
+}
+
+// --- CFG-MSGOUT-UBX_NAV_ODO_UART1 (key 0x2091007F) --------------------------
+// rate=1 → one NAV-ODO per navigation solution on UART1
+[[nodiscard]] inline UbxFrame valset_nav_odo_uart1(
+    uint8_t rate = 1,
+    ValLayer layers = ValLayer::RAM | ValLayer::BBR | ValLayer::Flash) noexcept
+{
+    return raw_valset_u8(0x2091007Fu, rate, layers);
+}
+
+// --- CFG-MSGOUT-UBX_NAV_DOP_UART1 (key 0x20910039) --------------------------
+// rate=1 → one NAV-DOP per navigation solution on UART1
+[[nodiscard]] inline UbxFrame valset_nav_dop_uart1(
+    uint8_t rate = 1,
+    ValLayer layers = ValLayer::RAM | ValLayer::BBR | ValLayer::Flash) noexcept
+{
+    return raw_valset_u8(0x20910039u, rate, layers);
+}
+
+// --- CFG-MSGOUT-UBX_NAV_SAT_UART1 (key 0x20910016) --------------------------
+// rate=1 → one NAV-SAT per navigation solution on UART1
+// NAV-SAT is variable-length (~8 + numSvs×12 bytes); can be large at 25 Hz.
+[[nodiscard]] inline UbxFrame valset_nav_sat_uart1(
+    uint8_t rate = 1,
+    ValLayer layers = ValLayer::RAM | ValLayer::BBR | ValLayer::Flash) noexcept
+{
+    return raw_valset_u8(0x20910016u, rate, layers);
+}
+
+// --- CFG-NAVSPG-FIXMODE (key 0x20110011) -------------------------------------
+// 1=2D only  2=3D only  3=auto (default)
+[[nodiscard]] inline UbxFrame valset_fix_mode(
+    uint8_t mode = 3,
+    ValLayer layers = ValLayer::RAM | ValLayer::BBR | ValLayer::Flash) noexcept
+{
+    return raw_valset_u8(0x20110011u, mode, layers);
+}
+
+// --- CFG-NAVSPG-DYNMODEL (key 0x20110021) ------------------------------------
+// 0=portable 2=stationary 3=pedestrian 4=automotive 5=sea
+// 6=air<1g  7=air<2g  8=air<4g (AIR4 — use for rockets)
+[[nodiscard]] inline UbxFrame valset_dyn_model(
+    uint8_t model = 8,
+    ValLayer layers = ValLayer::RAM | ValLayer::BBR | ValLayer::Flash) noexcept
+{
+    return raw_valset_u8(0x20110021u, model, layers);
+}
+
+// --- CFG-UART1INPROT-UBX (key 0x10730001) ------------------------------------
+[[nodiscard]] inline UbxFrame valset_uart1_inprot_ubx(
+    bool enable = true,
+    ValLayer layers = ValLayer::RAM | ValLayer::BBR | ValLayer::Flash) noexcept
+{
+    return raw_valset_u8(0x10730001u, enable ? 1u : 0u, layers);
+}
+
+// --- CFG-UART1INPROT-NMEA (key 0x10730002) ------------------------------------
+[[nodiscard]] inline UbxFrame valset_uart1_inprot_nmea(
+    bool enable = true,
+    ValLayer layers = ValLayer::RAM | ValLayer::BBR | ValLayer::Flash) noexcept
+{
+    return raw_valset_u8(0x10730002u, enable ? 1u : 0u, layers);
+}
+
+// --- CFG-UART1OUTPROT-UBX (key 0x10740001) ------------------------------------
+[[nodiscard]] inline UbxFrame valset_uart1_outprot_ubx(
+    bool enable = true,
+    ValLayer layers = ValLayer::RAM | ValLayer::BBR | ValLayer::Flash) noexcept
+{
+    return raw_valset_u8(0x10740001u, enable ? 1u : 0u, layers);
+}
+
+// --- CFG-UART1OUTPROT-NMEA (key 0x10740002) -----------------------------------
+[[nodiscard]] inline UbxFrame valset_uart1_outprot_nmea(
+    bool enable = false,
+    ValLayer layers = ValLayer::RAM | ValLayer::BBR | ValLayer::Flash) noexcept
+{
+    return raw_valset_u8(0x10740002u, enable ? 1u : 0u, layers);
+}
+
+// --- CFG-RATE-MEAS (key 0x30210001) — measurement period in ms ---------------
+// 40 ms = 25 Hz, 100 ms = 10 Hz, 200 ms = 5 Hz, 1000 ms = 1 Hz
+[[nodiscard]] inline UbxFrame valset_rate_meas(
+    uint16_t meas_ms = 40,
+    ValLayer layers = ValLayer::RAM | ValLayer::BBR | ValLayer::Flash) noexcept
+{
+    return raw_valset_u16(0x30210001u, meas_ms, layers);
+}
+
+// --- CFG-RATE-NAV (key 0x30210002) — measurements per nav solution -----------
+// Minimum 1, maximum 127.  Normally 1 (nav solution every measurement).
+[[nodiscard]] inline UbxFrame valset_rate_nav(
+    uint16_t ratio = 1,
+    ValLayer layers = ValLayer::RAM | ValLayer::BBR | ValLayer::Flash) noexcept
+{
+    return raw_valset_u16(0x30210002u, ratio, layers);
+}
+
+// --- CFG-UART1-BAUDRATE (key 0x40520001) — UART1 baud rate ------------------
+// Send at the CURRENT baud rate; re-init the host UART immediately after.
+// Common values: 9600, 38400, 115200, 230400, 460800, 921600.
+[[nodiscard]] inline UbxFrame valset_uart1_baud(
+    uint32_t baud,
+    ValLayer layers = ValLayer::RAM | ValLayer::BBR | ValLayer::Flash) noexcept
+{
+    UbxFrame f;
+    const auto li = detail::begin(f, 0x06, 0x8A);
+    detail::append(f, 0x01);
+    detail::append(f, static_cast<uint8_t>(layers));
+    detail::append(f, 0x00); detail::append(f, 0x00);
+    detail::append_u32le(f, 0x40520001u);   // key: CFG-UART1-BAUDRATE (U4)
+    detail::append_u32le(f, baud);
+    detail::end(f, li);
+    return f;
 }
 
 } // namespace Ubx

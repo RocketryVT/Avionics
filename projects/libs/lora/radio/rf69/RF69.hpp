@@ -18,7 +18,7 @@
 
 namespace radio::rf69 {
 
-// ── Configuration ─────────────────────────────────────────────────────────────
+// -- Configuration -------------------------------------------------------------
 
 struct Config {
     float   freq_mhz   = 433.0f;
@@ -30,7 +30,7 @@ struct Config {
     uint8_t preamble   = 16;      // preamble length in bits
 };
 
-// ── Driver ────────────────────────────────────────────────────────────────────
+// -- Driver --------------------------------------------------------------------
 
 class RF69 final : public radio::IRadio {
 public:
@@ -51,14 +51,21 @@ public:
 
     int begin() override
     {
+        const int8_t init_power =
+            ( cfg_.high_power && cfg_.tx_dbm > 13 ) ? 13 : cfg_.tx_dbm;
+
         int err = radio_.begin( cfg_.freq_mhz, cfg_.br_kbps, cfg_.fdev_khz,
-                                cfg_.rx_bw_khz, cfg_.tx_dbm, cfg_.preamble );
+                                cfg_.rx_bw_khz, init_power, cfg_.preamble );
         if ( err != RADIOLIB_ERR_NONE ) return err;
 
         // Re-apply output power with PA boost flag for the HCW variant.
         // begin() sets power without the flag; this corrects the PA registers.
-        if ( cfg_.high_power )
+        if ( cfg_.high_power ) {
             err = radio_.setOutputPower( cfg_.tx_dbm, true );
+            if ( err == RADIOLIB_ERR_NONE && init_power != cfg_.tx_dbm ) {
+                err = radio_.setOutputPower( cfg_.tx_dbm, true );
+            }
+        }
 
         return err;
     }

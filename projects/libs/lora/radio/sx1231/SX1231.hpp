@@ -26,7 +26,7 @@
 
 namespace radio::sx1231 {
 
-// ── Error codes ───────────────────────────────────────────────────────────────
+// -- Error codes ---------------------------------------------------------------
 
 enum class Err : int8_t {
     Ok              =  0,
@@ -39,7 +39,7 @@ enum class Err : int8_t {
     InvalidSyncWord = -7,
 };
 
-// ── Configuration ─────────────────────────────────────────────────────────────
+// -- Configuration -------------------------------------------------------------
 
 struct Config {
     float    freq_mhz      = 433.0f;
@@ -52,7 +52,7 @@ struct Config {
     uint32_t spi_hz        = 1'000'000;
 };
 
-// ── Driver ────────────────────────────────────────────────────────────────────
+// -- Driver --------------------------------------------------------------------
 
 class SX1231 final : public radio::IRadio {
 public:
@@ -83,7 +83,7 @@ public:
     // Dequeue the waiting packet.  Leaves radio in standby; call start_receive() again.
     int  read_packet( radio::Packet& pkt ) override;
 
-    // Extended API (chip-specific, not in IRadio) ──────────────────────────────
+    // Extended API (chip-specific, not in IRadio) ------------------------------
 
     [[nodiscard]] std::expected<void, Err> set_frequency   ( float mhz  );
     [[nodiscard]] std::expected<void, Err> set_bit_rate    ( float kbps );
@@ -101,7 +101,7 @@ public:
     [[nodiscard]] uint8_t chip_revision() const { return chip_rev_; }
 
 private:
-    // ── Register addresses ────────────────────────────────────────────────────
+    // -- Register addresses ----------------------------------------------------
     struct Reg {
         static constexpr uint8_t Fifo          = 0x00;
         static constexpr uint8_t OpMode        = 0x01;
@@ -139,26 +139,26 @@ private:
         static constexpr uint8_t TestOok       = 0x6E;  // SX1231-specific
     };
 
-    // ── Operating modes (OpMode register bits [4:2]) ──────────────────────────
+    // -- Operating modes (OpMode register bits [4:2]) --------------------------
     static constexpr uint8_t kModeSleep   = 0b00000000;
     static constexpr uint8_t kModeStandby = 0b00000100;
     static constexpr uint8_t kModeRx      = 0b00010000;
 
-    // ── Frequency synthesis (32 MHz XOSC, 2^19 divisor) ──────────────────────
+    // -- Frequency synthesis (32 MHz XOSC, 2^19 divisor) ----------------------
     static constexpr float    kXosc_MHz  = 32.0f;
     static constexpr uint32_t kFstepExp  = 19;
 
-    // ── Chip revision IDs ─────────────────────────────────────────────────────
+    // -- Chip revision IDs -----------------------------------------------------
     static constexpr uint8_t kRev2A = 0x21;
     static constexpr uint8_t kRev2D = 0x24;
 
-    // ── Private helpers ───────────────────────────────────────────────────────
+    // -- Private helpers -------------------------------------------------------
     void set_mode( uint8_t mode );
     void hw_reset();
     void clear_irq_flags();
     Err  apply_config();
 
-    // ── Members ───────────────────────────────────────────────────────────────
+    // -- Members ---------------------------------------------------------------
     radio::SpiDevice spi_dev_;
     uint    sck_, mosi_, miso_;
     uint    dio0_, rst_;

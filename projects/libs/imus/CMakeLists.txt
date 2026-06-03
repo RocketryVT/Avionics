@@ -1,0 +1,6 @@
+add_subdirectory(icm40609d)
+add_subdirectory(ism330dlc)
+add_subdirectory(adxl375)
+add_subdirectory(ism330dhcx)
+add_subdirectory(lsm6dso32)
+add_subdirectory(lsm6dsox)

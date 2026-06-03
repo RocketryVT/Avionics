@@ -158,6 +158,7 @@ private:
         case 0x07u: return length_ == sizeof(NavPvt);        // NAV-PVT
         case 0x14u: return length_ == sizeof(NavHpPosLlh);   // NAV-HPPOSLLH
         case 0x04u: return length_ == 18u;                   // NAV-DOP
+        case 0x09u: return length_ == 20u;                   // NAV-ODO
         case 0x35u: return true;                             // NAV-SAT (variable)
         default:    return false;
         }
@@ -174,7 +175,8 @@ private:
         switch (id_) {
         case 0x07u: diag_.ubx_pvt++; decode_nav_pvt();      break;
         case 0x14u: diag_.ubx_hp++;  decode_nav_hpposllh(); break;
-        case 0x04u:                   decode_nav_dop();       break;
+        case 0x04u: diag_.ubx_dop++; decode_nav_dop();      break;
+        case 0x09u: diag_.ubx_odo++;                         break;
         case 0x35u:                   decode_nav_sat();       break;
         }
     }

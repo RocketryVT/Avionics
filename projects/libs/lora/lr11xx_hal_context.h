@@ -25,14 +25,14 @@
 #include "FreeRTOS.h"
 #include "semphr.h"
 
-// ── Context struct ────────────────────────────────────────────────────────────
+// -- Context struct ------------------------------------------------------------
 // Fill in the public fields, then call lr11xx_hal_init().
 // The _mutex / _mutex_buf fields are internal — zero-init them (or use
 // LR11XX_HAL_CONTEXT_INIT which does this automatically).
 
 typedef struct lr11xx_hal_context_s
 {
-    // ── User-configurable (set before lr11xx_hal_init) ────────────────────────
+    // -- User-configurable (set before lr11xx_hal_init) ------------------------
     spi_inst_t* spi;        ///< SPI peripheral — spi0 or spi1
     uint32_t    spi_hz;     ///< SPI clock frequency in Hz (max 16 MHz)
     uint        pin_sck;    ///< GPIO: SPI clock
@@ -42,11 +42,11 @@ typedef struct lr11xx_hal_context_s
     uint        pin_busy;   ///< GPIO: BUSY signal (active-high input)
     uint        pin_nreset; ///< GPIO: NRESET (active-low output)
 
-    // ── Internal — initialised by lr11xx_hal_init(); do not modify ────────────
+    // -- Internal — initialised by lr11xx_hal_init(); do not modify ------------
     SemaphoreHandle_t _mutex;      ///< SPI bus mutex (dynamic allocation)
 } lr11xx_hal_context_t;
 
-// ── Convenience initialiser ───────────────────────────────────────────────────
+// -- Convenience initialiser ---------------------------------------------------
 // Produces a brace-initialiser expression for lr11xx_hal_context_t with the
 // internal fields zero-initialised.  Compatible with C99 and C++17.
 //

@@ -4,7 +4,7 @@
 #include <RadioLib.h>
 #include <stdio.h>
 
-// ── Pin definitions ────────────────────────────────────────────────────────
+// -- Pin definitions --------------------------------------------------------
 #define PIN_SCK   6
 #define PIN_MOSI  7
 #define PIN_MISO  4
@@ -12,7 +12,7 @@
 #define PIN_DIO0  0
 #define PIN_RESET 14
 
-// ── Setup HAL and radio ────────────────────────────────────────────────────
+// -- Setup HAL and radio ----------------------------------------------------
 PicoHal hal( spi0, PIN_SCK, PIN_MOSI, PIN_MISO );
 SX1276 radio = new Module( &hal, PIN_NSS, PIN_DIO0, PIN_RESET, RADIOLIB_NC );
 
@@ -46,7 +46,7 @@ int main() {
 
     printf( "Init state: %d\n", state );
     
-    // // ── Transmitter loop ───────────────────────────────────────────────────
+    // // -- Transmitter loop ---------------------------------------------------
     while( true ) {
         printf( "Transmitting...\n" );
 
@@ -61,7 +61,7 @@ int main() {
         sleep_ms( 5000 );
     }
 
-    // ── Receiver loop ─────────────────────────────────────────────────────
+    // -- Receiver loop -----------------------------------------------------
     // char received[256];
 
     // while( true ) {

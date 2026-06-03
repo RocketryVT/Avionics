@@ -9,7 +9,7 @@
 
 namespace radio {
 
-// ── Packet ────────────────────────────────────────────────────────────────────
+// -- Packet --------------------------------------------------------------------
 // Filled by IRadio::read_packet().  Fields unused by a given modulation are
 // left at their zero-initialised defaults (e.g. snr for FSK radios).
 
@@ -20,7 +20,7 @@ struct Packet {
     float   snr       = 0.0f;  // dB — LoRa only; 0 for FSK
 };
 
-// ── IRadio ────────────────────────────────────────────────────────────────────
+// -- IRadio --------------------------------------------------------------------
 // Minimal, polling-oriented interface for receive-focused radio drivers.
 // All drivers are constructed with their config; begin() takes no arguments.
 

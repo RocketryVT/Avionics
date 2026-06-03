@@ -19,7 +19,7 @@
 // Returned by begin() / readPacket() on success.
 static constexpr int LORA_OK = 0;   // == RADIOLIB_ERR_NONE
 
-// ── Radio configuration ───────────────────────────────────────────────────────
+// -- Radio configuration -------------------------------------------------------
 struct SX1276Config {
     float    freq_mhz  = 915.0f;
     float    bw_khz    = 125.0f;
@@ -30,7 +30,7 @@ struct SX1276Config {
     uint16_t preamble  = 8;
 };
 
-// ── Received packet ───────────────────────────────────────────────────────────
+// -- Received packet -----------------------------------------------------------
 struct LoRaPacket {
     char    data[ 256 ];
     uint8_t len;
@@ -38,7 +38,7 @@ struct LoRaPacket {
     float   snr;
 };
 
-// ── Wrapper class ─────────────────────────────────────────────────────────────
+// -- Wrapper class -------------------------------------------------------------
 class SX1276Radio {
 public:
     // Construct with SPI bus + GPIO pin numbers.

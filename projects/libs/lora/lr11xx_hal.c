@@ -26,11 +26,11 @@
 #include "hardware/spi.h"
 #include "hardware/gpio.h"
 
-// ─── Busy-wait timeout ────────────────────────────────────────────────────────
+// --- Busy-wait timeout --------------------------------------------------------
 // 30 s covers even the longest LoRa frame (SF12, BW 125 kHz, 255-byte payload).
 #define BUSY_TIMEOUT_MS  30000u
 
-// ─── Internal helpers ─────────────────────────────────────────────────────────
+// --- Internal helpers ---------------------------------------------------------
 
 static inline void nss_low ( const lr11xx_hal_context_t* ctx ) { gpio_put( ctx->pin_nss, 0 ); }
 static inline void nss_high( const lr11xx_hal_context_t* ctx ) { gpio_put( ctx->pin_nss, 1 ); }
@@ -57,7 +57,7 @@ static lr11xx_hal_status_t wait_busy( const lr11xx_hal_context_t* ctx )
     return LR11XX_HAL_STATUS_OK;
 }
 
-// ─── Init ─────────────────────────────────────────────────────────────────────
+// --- Init ---------------------------------------------------------------------
 
 void lr11xx_hal_init( lr11xx_hal_context_t* ctx )
 {
@@ -95,7 +95,7 @@ void lr11xx_hal_init( lr11xx_hal_context_t* ctx )
     gpio_put( ctx->pin_nreset, 1 );
 }
 
-// ─── HAL Write ────────────────────────────────────────────────────────────────
+// --- HAL Write ----------------------------------------------------------------
 
 lr11xx_hal_status_t lr11xx_hal_write( const void*    context,
                                        const uint8_t* command,
@@ -126,7 +126,7 @@ lr11xx_hal_status_t lr11xx_hal_write( const void*    context,
     return LR11XX_HAL_STATUS_OK;
 }
 
-// ─── HAL Read ─────────────────────────────────────────────────────────────────
+// --- HAL Read -----------------------------------------------------------------
 // Two-step operation (per hal.h contract):
 //   Step 1: NSS↓ -> send command -> NSS↑
 //   Step 2: NSS↓ -> discard dummy byte -> read data -> NSS↑
@@ -175,7 +175,7 @@ lr11xx_hal_status_t lr11xx_hal_read( const void*    context,
     return LR11XX_HAL_STATUS_OK;
 }
 
-// ─── HAL Direct Read ──────────────────────────────────────────────────────────
+// --- HAL Direct Read ----------------------------------------------------------
 // Single-step NSS/read/NSS — no command phase.
 // Used only by lr11xx_system_get_status and lr11xx_bootloader_get_status.
 
@@ -202,7 +202,7 @@ lr11xx_hal_status_t lr11xx_hal_direct_read( const void*    context,
     return LR11XX_HAL_STATUS_OK;
 }
 
-// ─── HAL Reset ────────────────────────────────────────────────────────────────
+// --- HAL Reset ----------------------------------------------------------------
 
 lr11xx_hal_status_t lr11xx_hal_reset( const void* context )
 {
@@ -222,7 +222,7 @@ lr11xx_hal_status_t lr11xx_hal_reset( const void* context )
     return status;
 }
 
-// ─── HAL Wakeup ───────────────────────────────────────────────────────────────
+// --- HAL Wakeup ---------------------------------------------------------------
 // Per datasheet §4.3: NSS↓ -> hold 100 µs -> NSS↑ -> wait BUSY↓.
 // The 100 µs pulse must be precise, so sleep_us() is kept here.
 
@@ -242,7 +242,7 @@ lr11xx_hal_status_t lr11xx_hal_wakeup( const void* context )
     return status;
 }
 
-// ─── HAL Abort Blocking Command ───────────────────────────────────────────────
+// --- HAL Abort Blocking Command -----------------------------------------------
 // Interrupts any ongoing blocking command by toggling NSS.
 
 lr11xx_hal_status_t lr11xx_hal_abort_blocking_cmd( const void* context )
@@ -259,7 +259,7 @@ lr11xx_hal_status_t lr11xx_hal_abort_blocking_cmd( const void* context )
     return LR11XX_HAL_STATUS_OK;
 }
 
-// ─── HAL Wait Busy (public) ───────────────────────────────────────────────────
+// --- HAL Wait Busy (public) ---------------------------------------------------
 // Call after lr11xx_radio_set_tx() / lr11xx_radio_set_rx() to block the
 // calling task until the radio finishes (BUSY goes low) without spinning the
 // CPU.  Does NOT hold the SPI mutex — the mutex is only needed around SPI

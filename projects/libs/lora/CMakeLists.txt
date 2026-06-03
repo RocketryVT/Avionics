@@ -10,7 +10,7 @@
 #
 #   lr11xx      — Semtech LR11XX C driver + Pico SPI HAL (static library).
 
-# ── RadioLib (local copy) ─────────────────────────────────────────────────────
+# -- RadioLib (local copy) -----------------------------------------------------
 # Expects RADIOLIB_PATH to be set (done in deps.cmake).
 # Fall back to a path relative to the avionics root if not set.
 if (NOT DEFINED RADIOLIB_PATH)
@@ -32,7 +32,7 @@ set(RADIOLIB_BUILD_TESTS    OFF CACHE BOOL "" FORCE)
 
 add_subdirectory(${RADIOLIB_PATH} ${CMAKE_CURRENT_BINARY_DIR}/radiolib EXCLUDE_FROM_ALL)
 
-# ── radio_hal INTERFACE target ────────────────────────────────────────────────
+# -- radio_hal INTERFACE target ------------------------------------------------
 # Consumers get:
 #   • RadioLib headers (via the RadioLib target)
 #   • hal/PicoHal.h               — Pico SDK implementation of RadioLibHal
@@ -54,7 +54,7 @@ target_link_libraries(radio_hal INTERFACE
     hardware_gpio
 )
 
-# ── sx1231 static library (native driver, no RadioLib) ────────────────────────
+# -- sx1231 static library (native driver, no RadioLib) ------------------------
 # Provides radio::sx1231::SX1231.  Link alongside radio_hal (for Radio.hpp /
 # SpiDevice.hpp) or standalone — both header sets are in radio/.
 add_library(sx1231 STATIC
@@ -73,7 +73,7 @@ target_link_libraries(sx1231 PUBLIC
 
 target_compile_features(sx1231 PUBLIC cxx_std_23)
 
-# ── LR11XX (Semtech vendor driver) ────────────────────────────────────────────
+# -- LR11XX (Semtech vendor driver) --------------------------------------------
 add_subdirectory(lr11xx_driver)
 
 add_library(lr11xx STATIC lr11xx_hal.c)

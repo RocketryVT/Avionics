@@ -81,7 +81,7 @@ struct SX126x
         uint8_t  pin_busy;
         uint8_t  pin_dio1;
         uint32_t frequency_hz      = 915'000'000;
-        uint8_t  bandwidth         = 7;    // 0-9 → 7.81–500 kHz (LoRa BW index)
+        uint8_t  bandwidth         = 7;    // 0-9 -> 7.81–500 kHz (LoRa BW index)
         uint8_t  spreading_factor  = 9;    // 5–12
         uint8_t  coding_rate       = 1;    // 1=4/5, 2=4/6, 3=4/7, 4=4/8
         int8_t   tx_power_dbm      = 14;

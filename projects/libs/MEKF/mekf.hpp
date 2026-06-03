@@ -87,7 +87,7 @@ public:
         apply_config();
     }
 
-    // ─── Quaternion utilities (Hamilton, scalar-last [x,y,z,w]) ───
+    // --- Quaternion utilities (Hamilton, scalar-last [x,y,z,w]) ---
 
     static Vec4 quat_multiply(const Vec4& p, const Vec4& q) {
         T pw = p(3), qw = q(3);
