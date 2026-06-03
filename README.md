@@ -42,6 +42,23 @@ This repository includes the projects listed above along with flight data from o
 
 Each project has its own repository with detailed build instructions and usage documentation. Check the individual project links above to get started with any specific system.
 
+## Contributing
+
+### How to Contribute
+
+Please follow these guidelines to contribute to our projects:
+
+1. Choose what project you want to contribute to from the list above or in the 'projects/' directory.
+2. Inside the subrepository for that project make a new branch for your changes.
+3. Make your changes and commit them with clear messages.
+4. Push your branch to the repository and open a pull request against the main branch.
+5. The maintainers will review your pull request and provide feedback or merge it if everything looks good.
+
+### Using the monorepo CMake setup
+
+To build any of the projects in this monorepo, you can use the provided meta CMake configuration. Here's how to get started:
+
+
 ---
 
 [Rocketry at Virginia Tech](https://rocketryatvirginiatech.org/) | [GitHub Organization](https://github.com/RocketryVT)

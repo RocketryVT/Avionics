@@ -108,12 +108,57 @@ endif()
 
 # LIS3MDL magnetometer driver
 if (NOT DEFINED LIS3MDL_ROOT)
-    set(LIS3MDL_ROOT "${LIBS_ROOT}/lis3mdl" CACHE PATH "Path to LIS3MDL driver")
+    set(LIS3MDL_ROOT "${LIBS_ROOT}/mags/lis3mdl" CACHE PATH "Path to LIS3MDL driver")
 endif()
 
 # ISM330DLC IMU driver
 if (NOT DEFINED ISM330DLC_ROOT)
-    set(ISM330DLC_ROOT "${LIBS_ROOT}/ism330dlc" CACHE PATH "Path to ISM330DLC driver")
+    set(ISM330DLC_ROOT "${LIBS_ROOT}/imus/ism330dlc" CACHE PATH "Path to ISM330DLC driver")
+endif()
+
+# ICM-40609-D IMU driver
+if (NOT DEFINED ICM40609D_ROOT)
+    set(ICM40609D_ROOT "${LIBS_ROOT}/imus/icm40609d" CACHE PATH "Path to ICM-40609-D driver")
+endif()
+
+# ICM-20948 9-axis IMU driver
+if (NOT DEFINED NINE_AXIS_IMU_ROOT)
+    set(NINE_AXIS_IMU_ROOT "${LIBS_ROOT}/9axisIMU" CACHE PATH "Path to ICM-20948 9-axis IMU driver")
+endif()
+
+# MS5611 barometer driver
+if (NOT DEFINED MS5611_ROOT)
+    set(MS5611_ROOT "${LIBS_ROOT}/baros/ms5611" CACHE PATH "Path to MS5611 driver")
+endif()
+
+# MS5607 barometer driver
+if (NOT DEFINED MS5607_ROOT)
+    set(MS5607_ROOT "${LIBS_ROOT}/baros/ms5607" CACHE PATH "Path to MS5607 driver")
+endif()
+
+# CL57TE stepper motor driver
+if (NOT DEFINED CL57TE_ROOT)
+    set(CL57TE_ROOT "${LIBS_ROOT}/actuators/cl57te" CACHE PATH "Path to CL57TE stepper driver")
+endif()
+
+# ADXL375 high-g accelerometer driver
+if (NOT DEFINED ADXL375_ROOT)
+    set(ADXL375_ROOT "${LIBS_ROOT}/imus/adxl375" CACHE PATH "Path to ADXL375 driver")
+endif()
+
+# ISM330DHCX IMU driver
+if (NOT DEFINED ISM330DHCX_ROOT)
+    set(ISM330DHCX_ROOT "${LIBS_ROOT}/imus/ism330dhcx" CACHE PATH "Path to ISM330DHCX driver")
+endif()
+
+# LSM6DSO32 IMU driver
+if (NOT DEFINED LSM6DSO32_ROOT)
+    set(LSM6DSO32_ROOT "${LIBS_ROOT}/imus/lsm6dso32" CACHE PATH "Path to LSM6DSO32 driver")
+endif()
+
+# LSM6DSOX IMU driver
+if (NOT DEFINED LSM6DSOX_ROOT)
+    set(LSM6DSOX_ROOT "${LIBS_ROOT}/imus/lsm6dsox" CACHE PATH "Path to LSM6DSOX driver")
 endif()
 
 # Ground-station math (haversine, azimuth, elevation)
