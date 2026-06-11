@@ -1,0 +1,809 @@
+[rx] noise floor -119.0 dBm
+[rx] PACKET 19 B  RSSI -70.0 dBm  SNR 9.8 dB  ferr -2642 Hz
+     text: "lora915_tx_test #84"
+[rx] link: good=85 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.5/9.0/9.8 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 19 B  RSSI -71.0 dBm  SNR 12.2 dB  ferr -2642 Hz
+     text: "lora915_tx_test #85"
+[rx] link: good=86 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.6/9.0/12.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 19 B  RSSI -66.0 dBm  SNR 9.5 dB  ferr -2659 Hz
+     text: "lora915_tx_test #86"
+[rx] link: good=87 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.6/9.0/12.2 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 19 B  RSSI -70.0 dBm  SNR 9.5 dB  ferr -2659 Hz
+     text: "lora915_tx_test #87"
+[rx] link: good=88 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.7/9.0/12.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 19 B  RSSI -75.0 dBm  SNR 9.5 dB  ferr -2659 Hz
+     text: "lora915_tx_test #88"
+[rx] link: good=89 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.7/9.0/12.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 19 B  RSSI -73.0 dBm  SNR 9.8 dB  ferr -2659 Hz
+     text: "lora915_tx_test #89"
+[rx] link: good=90 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.7/9.0/12.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 19 B  RSSI -71.0 dBm  SNR 9.8 dB  ferr -2659 Hz
+     text: "lora915_tx_test #90"
+[rx] link: good=91 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.7/9.0/12.2 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 19 B  RSSI -70.0 dBm  SNR 9.2 dB  ferr -2676 Hz
+     text: "lora915_tx_test #91"
+[rx] link: good=92 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.7/9.0/12.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 19 B  RSSI -71.0 dBm  SNR 9.5 dB  ferr -2676 Hz
+     text: "lora915_tx_test #92"
+[rx] link: good=93 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.7/9.0/12.2 dB (last 16)
+[rx] noise floor -129.0 dBm
+[rx] noise floor -66.0 dBm
+[rx] PACKET 19 B  RSSI -72.0 dBm  SNR 9.5 dB  ferr -2676 Hz
+     text: "lora915_tx_test #93"
+[rx] link: good=94 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.7/9.0/12.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 19 B  RSSI -72.0 dBm  SNR 9.2 dB  ferr -2693 Hz
+     text: "lora915_tx_test #94"
+[rx] link: good=95 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.7/9.0/12.2 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 19 B  RSSI -74.0 dBm  SNR 10.2 dB  ferr -2710 Hz
+     text: "lora915_tx_test #95"
+[rx] link: good=96 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.7/9.0/12.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 19 B  RSSI -73.0 dBm  SNR 9.8 dB  ferr -2710 Hz
+     text: "lora915_tx_test #96"
+[rx] link: good=97 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.7/9.0/12.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 19 B  RSSI -74.0 dBm  SNR 9.8 dB  ferr -2726 Hz
+     text: "lora915_tx_test #97"
+[rx] link: good=98 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.8/9.2/12.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 19 B  RSSI -80.0 dBm  SNR 10.0 dB  ferr -2726 Hz
+     text: "lora915_tx_test #98"
+[rx] link: good=99 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.8/9.2/12.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 19 B  RSSI -78.0 dBm  SNR 9.8 dB  ferr -2743 Hz
+     text: "lora915_tx_test #99"
+[rx] link: good=100 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.8/9.2/12.2 dB (last 16)
+[rx] noise floor -116.0 dBm
+[rx] PACKET 20 B  RSSI -97.0 dBm  SNR 10.0 dB  ferr -2760 Hz
+     text: "lora915_tx_test #100"
+[rx] link: good=101 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.8/9.2/12.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -79.0 dBm  SNR 9.5 dB  ferr -2777 Hz
+     text: "lora915_tx_test #101"
+[rx] link: good=102 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -121.0 dBm
+[rx] PACKET 20 B  RSSI -82.0 dBm  SNR 9.8 dB  ferr -2777 Hz
+     text: "lora915_tx_test #102"
+[rx] link: good=103 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -89.0 dBm  SNR 9.5 dB  ferr -2777 Hz
+     text: "lora915_tx_test #103"
+[rx] link: good=104 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -82.0 dBm  SNR 9.8 dB  ferr -2793 Hz
+     text: "lora915_tx_test #104"
+[rx] link: good=105 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -116.0 dBm
+[rx] PACKET 20 B  RSSI -79.0 dBm  SNR 9.8 dB  ferr -2810 Hz
+     text: "lora915_tx_test #105"
+[rx] link: good=106 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -116.0 dBm
+[rx] PACKET 20 B  RSSI -85.0 dBm  SNR 9.8 dB  ferr -2827 Hz
+     text: "lora915_tx_test #106"
+[rx] link: good=107 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -80.0 dBm  SNR 9.8 dB  ferr -2827 Hz
+     text: "lora915_tx_test #107"
+[rx] link: good=108 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -116.0 dBm
+[rx] PACKET 20 B  RSSI -81.0 dBm  SNR 9.8 dB  ferr -2827 Hz
+     text: "lora915_tx_test #108"
+[rx] link: good=109 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -85.0 dBm  SNR 9.5 dB  ferr -2827 Hz
+     text: "lora915_tx_test #109"
+[rx] link: good=110 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -88.0 dBm  SNR 9.2 dB  ferr -2844 Hz
+     text: "lora915_tx_test #110"
+[rx] link: good=111 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] noise floor -86.0 dBm
+[rx] PACKET 20 B  RSSI -92.0 dBm  SNR 9.8 dB  ferr -2844 Hz
+     text: "lora915_tx_test #111"
+[rx] link: good=112 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.7/9.2/10.0 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -86.0 dBm  SNR 9.5 dB  ferr -2844 Hz
+     text: "lora915_tx_test #112"
+[rx] link: good=113 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.7/9.2/10.0 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -87.0 dBm  SNR 9.8 dB  ferr -2844 Hz
+     text: "lora915_tx_test #113"
+[rx] link: good=114 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.7/9.2/10.0 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -85.0 dBm  SNR 10.2 dB  ferr -2844 Hz
+     text: "lora915_tx_test #114"
+[rx] link: good=115 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -83.0 dBm  SNR 9.5 dB  ferr -2844 Hz
+     text: "lora915_tx_test #115"
+[rx] link: good=116 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -82.0 dBm  SNR 9.5 dB  ferr -2844 Hz
+     text: "lora915_tx_test #116"
+[rx] link: good=117 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -83.0 dBm  SNR 9.5 dB  ferr -2861 Hz
+     text: "lora915_tx_test #117"
+[rx] link: good=118 lost=0 crc=0 PER=0.0%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] CRC ERROR (20 B)  RSSI -90.0 dBm  SNR 5.0 dB  ferr -2508 Hz
+[rx] link: good=118 lost=0 crc=1 PER=0.0%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -121.0 dBm
+[rx] PACKET 20 B  RSSI -81.0 dBm  SNR 9.5 dB  ferr -2861 Hz
+     text: "lora915_tx_test #119"
+[rx] link: good=119 lost=1 crc=1 PER=0.8%  SNR avg/min/max=9.6/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -81.0 dBm  SNR 9.2 dB  ferr -2861 Hz
+     text: "lora915_tx_test #120"
+[rx] link: good=120 lost=1 crc=1 PER=0.8%  SNR avg/min/max=9.6/9.2/10.2 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 20 B  RSSI -84.0 dBm  SNR 9.8 dB  ferr -2877 Hz
+     text: "lora915_tx_test #121"
+[rx] link: good=121 lost=1 crc=1 PER=0.8%  SNR avg/min/max=9.6/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -81.0 dBm  SNR 9.8 dB  ferr -2894 Hz
+     text: "lora915_tx_test #122"
+[rx] link: good=122 lost=1 crc=1 PER=0.8%  SNR avg/min/max=9.6/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -79.0 dBm  SNR 9.8 dB  ferr -2894 Hz
+     text: "lora915_tx_test #123"
+[rx] link: good=123 lost=1 crc=1 PER=0.8%  SNR avg/min/max=9.6/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -81.0 dBm  SNR 9.5 dB  ferr -2894 Hz
+     text: "lora915_tx_test #124"
+[rx] link: good=124 lost=1 crc=1 PER=0.8%  SNR avg/min/max=9.6/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -80.0 dBm  SNR 9.8 dB  ferr -2911 Hz
+     text: "lora915_tx_test #125"
+[rx] link: good=125 lost=1 crc=1 PER=0.8%  SNR avg/min/max=9.6/9.2/10.2 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 20 B  RSSI -78.0 dBm  SNR 10.0 dB  ferr -2911 Hz
+     text: "lora915_tx_test #126"
+[rx] link: good=126 lost=1 crc=1 PER=0.8%  SNR avg/min/max=9.6/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -81.0 dBm  SNR 9.2 dB  ferr -2928 Hz
+     text: "lora915_tx_test #127"
+[rx] link: good=127 lost=1 crc=1 PER=0.8%  SNR avg/min/max=9.6/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] noise floor -75.0 dBm
+[rx] PACKET 20 B  RSSI -81.0 dBm  SNR 9.5 dB  ferr -2928 Hz
+     text: "lora915_tx_test #128"
+[rx] link: good=128 lost=1 crc=1 PER=0.8%  SNR avg/min/max=9.6/9.2/10.2 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 20 B  RSSI -80.0 dBm  SNR 9.8 dB  ferr -2944 Hz
+     text: "lora915_tx_test #129"
+[rx] link: good=129 lost=1 crc=1 PER=0.8%  SNR avg/min/max=9.6/9.2/10.2 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 20 B  RSSI -79.0 dBm  SNR 10.2 dB  ferr -2944 Hz
+     text: "lora915_tx_test #130"
+[rx] link: good=130 lost=1 crc=1 PER=0.8%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -80.0 dBm  SNR 9.5 dB  ferr -2961 Hz
+     text: "lora915_tx_test #131"
+[rx] link: good=131 lost=1 crc=1 PER=0.8%  SNR avg/min/max=9.6/9.2/10.2 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 20 B  RSSI -81.0 dBm  SNR 9.5 dB  ferr -2961 Hz
+     text: "lora915_tx_test #132"
+[rx] link: good=132 lost=1 crc=1 PER=0.8%  SNR avg/min/max=9.6/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -83.0 dBm  SNR 9.8 dB  ferr -2961 Hz
+     text: "lora915_tx_test #133"
+[rx] link: good=133 lost=1 crc=1 PER=0.7%  SNR avg/min/max=9.6/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -81.0 dBm  SNR 9.2 dB  ferr -2961 Hz
+     text: "lora915_tx_test #134"
+[rx] link: good=134 lost=1 crc=1 PER=0.7%  SNR avg/min/max=9.6/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -81.0 dBm  SNR 9.8 dB  ferr -2978 Hz
+     text: "lora915_tx_test #135"
+[rx] link: good=135 lost=1 crc=1 PER=0.7%  SNR avg/min/max=9.6/9.2/10.2 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 20 B  RSSI -79.0 dBm  SNR 10.0 dB  ferr -2961 Hz
+     text: "lora915_tx_test #136"
+[rx] link: good=136 lost=1 crc=1 PER=0.7%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -81.0 dBm  SNR 9.8 dB  ferr -2978 Hz
+     text: "lora915_tx_test #137"
+[rx] link: good=137 lost=1 crc=1 PER=0.7%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -78.0 dBm  SNR 9.5 dB  ferr -2978 Hz
+     text: "lora915_tx_test #138"
+[rx] link: good=138 lost=1 crc=1 PER=0.7%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 20 B  RSSI -85.0 dBm  SNR 9.8 dB  ferr -3012 Hz
+     text: "lora915_tx_test #139"
+[rx] link: good=139 lost=1 crc=1 PER=0.7%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -81.0 dBm  SNR 9.5 dB  ferr -3012 Hz
+     text: "lora915_tx_test #140"
+[rx] link: good=140 lost=1 crc=1 PER=0.7%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 20 B  RSSI -80.0 dBm  SNR 10.0 dB  ferr -3012 Hz
+     text: "lora915_tx_test #141"
+[rx] link: good=141 lost=1 crc=1 PER=0.7%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 20 B  RSSI -80.0 dBm  SNR 9.5 dB  ferr -3012 Hz
+     text: "lora915_tx_test #142"
+[rx] link: good=142 lost=1 crc=1 PER=0.7%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 20 B  RSSI -80.0 dBm  SNR 9.8 dB  ferr -3028 Hz
+     text: "lora915_tx_test #143"
+[rx] link: good=143 lost=1 crc=1 PER=0.7%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -79.0 dBm  SNR 9.8 dB  ferr -3028 Hz
+     text: "lora915_tx_test #144"
+[rx] link: good=144 lost=1 crc=1 PER=0.7%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 20 B  RSSI -80.0 dBm  SNR 10.0 dB  ferr -3045 Hz
+     text: "lora915_tx_test #145"
+[rx] link: good=145 lost=1 crc=1 PER=0.7%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] noise floor -80.0 dBm
+[rx] PACKET 20 B  RSSI -86.0 dBm  SNR 9.8 dB  ferr -3045 Hz
+     text: "lora915_tx_test #146"
+[rx] link: good=146 lost=1 crc=1 PER=0.7%  SNR avg/min/max=9.7/9.2/10.0 dB (last 16)
+[rx] noise floor -122.0 dBm
+[rx] PACKET 20 B  RSSI -81.0 dBm  SNR 9.5 dB  ferr -3045 Hz
+     text: "lora915_tx_test #147"
+[rx] link: good=147 lost=1 crc=1 PER=0.7%  SNR avg/min/max=9.7/9.2/10.0 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 20 B  RSSI -91.0 dBm  SNR 10.0 dB  ferr -3062 Hz
+     text: "lora915_tx_test #148"
+[rx] link: good=148 lost=1 crc=1 PER=0.7%  SNR avg/min/max=9.7/9.2/10.0 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 20 B  RSSI -79.0 dBm  SNR 9.8 dB  ferr -3062 Hz
+     text: "lora915_tx_test #149"
+[rx] link: good=149 lost=1 crc=1 PER=0.7%  SNR avg/min/max=9.7/9.2/10.0 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -99.0 dBm  SNR 9.5 dB  ferr -3079 Hz
+     text: "lora915_tx_test #150"
+[rx] link: good=150 lost=1 crc=1 PER=0.7%  SNR avg/min/max=9.7/9.5/10.0 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -81.0 dBm  SNR 9.2 dB  ferr -3079 Hz
+     text: "lora915_tx_test #151"
+[rx] link: good=151 lost=1 crc=1 PER=0.7%  SNR avg/min/max=9.7/9.2/10.0 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 20 B  RSSI -84.0 dBm  SNR 10.2 dB  ferr -3095 Hz
+     text: "lora915_tx_test #152"
+[rx] link: good=152 lost=1 crc=1 PER=0.7%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 20 B  RSSI -82.0 dBm  SNR 9.8 dB  ferr -3095 Hz
+     text: "lora915_tx_test #153"
+[rx] link: good=153 lost=1 crc=1 PER=0.6%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -97.0 dBm  SNR 9.5 dB  ferr -3112 Hz
+     text: "lora915_tx_test #154"
+[rx] link: good=154 lost=1 crc=1 PER=0.6%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -121.0 dBm
+[rx] PACKET 20 B  RSSI -82.0 dBm  SNR 10.0 dB  ferr -3112 Hz
+     text: "lora915_tx_test #155"
+[rx] link: good=155 lost=1 crc=1 PER=0.6%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -89.0 dBm  SNR 10.0 dB  ferr -3112 Hz
+     text: "lora915_tx_test #156"
+[rx] link: good=156 lost=1 crc=1 PER=0.6%  SNR avg/min/max=9.8/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -90.0 dBm  SNR 10.0 dB  ferr -3129 Hz
+     text: "lora915_tx_test #157"
+[rx] link: good=157 lost=1 crc=1 PER=0.6%  SNR avg/min/max=9.8/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -87.0 dBm  SNR 9.8 dB  ferr -3146 Hz
+     text: "lora915_tx_test #158"
+[rx] link: good=158 lost=1 crc=1 PER=0.6%  SNR avg/min/max=9.8/9.2/10.2 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 20 B  RSSI -86.0 dBm  SNR 9.5 dB  ferr -3146 Hz
+     text: "lora915_tx_test #159"
+[rx] link: good=159 lost=1 crc=1 PER=0.6%  SNR avg/min/max=9.8/9.2/10.2 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 20 B  RSSI -84.0 dBm  SNR 10.0 dB  ferr -3163 Hz
+     text: "lora915_tx_test #160"
+[rx] link: good=160 lost=1 crc=1 PER=0.6%  SNR avg/min/max=9.8/9.2/10.2 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 20 B  RSSI -85.0 dBm  SNR 9.5 dB  ferr -3163 Hz
+     text: "lora915_tx_test #161"
+[rx] link: good=161 lost=1 crc=1 PER=0.6%  SNR avg/min/max=9.8/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -96.0 dBm  SNR 9.2 dB  ferr -3163 Hz
+     text: "lora915_tx_test #162"
+[rx] link: good=162 lost=1 crc=1 PER=0.6%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -119.0 dBm
+[rx] PACKET 20 B  RSSI -82.0 dBm  SNR 9.5 dB  ferr -3163 Hz
+     text: "lora915_tx_test #163"
+[rx] link: good=163 lost=1 crc=1 PER=0.6%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -119.0 dBm
+[rx] noise floor -86.0 dBm
+[rx] PACKET 20 B  RSSI -88.0 dBm  SNR 10.0 dB  ferr -3163 Hz
+     text: "lora915_tx_test #164"
+[rx] link: good=164 lost=1 crc=1 PER=0.6%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -82.0 dBm  SNR 9.5 dB  ferr -3179 Hz
+     text: "lora915_tx_test #165"
+[rx] link: good=165 lost=1 crc=1 PER=0.6%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -87.0 dBm  SNR 9.5 dB  ferr -3179 Hz
+     text: "lora915_tx_test #166"
+[rx] link: good=166 lost=1 crc=1 PER=0.6%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -80.0 dBm  SNR 9.8 dB  ferr -3179 Hz
+     text: "lora915_tx_test #167"
+[rx] link: good=167 lost=1 crc=1 PER=0.6%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -86.0 dBm  SNR 9.2 dB  ferr -3179 Hz
+     text: "lora915_tx_test #168"
+[rx] link: good=168 lost=1 crc=1 PER=0.6%  SNR avg/min/max=9.7/9.2/10.0 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -82.0 dBm  SNR 9.5 dB  ferr -3196 Hz
+     text: "lora915_tx_test #169"
+[rx] link: good=169 lost=1 crc=1 PER=0.6%  SNR avg/min/max=9.7/9.2/10.0 dB (last 16)
+[rx] noise floor -115.0 dBm
+[rx] PACKET 20 B  RSSI -89.0 dBm  SNR 10.0 dB  ferr -3196 Hz
+     text: "lora915_tx_test #170"
+[rx] link: good=170 lost=1 crc=1 PER=0.6%  SNR avg/min/max=9.7/9.2/10.0 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -87.0 dBm  SNR 9.5 dB  ferr -3196 Hz
+     text: "lora915_tx_test #171"
+[rx] link: good=171 lost=1 crc=1 PER=0.6%  SNR avg/min/max=9.7/9.2/10.0 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -87.0 dBm  SNR 9.8 dB  ferr -3196 Hz
+     text: "lora915_tx_test #172"
+[rx] link: good=172 lost=1 crc=1 PER=0.6%  SNR avg/min/max=9.6/9.2/10.0 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -90.0 dBm  SNR 9.8 dB  ferr -3179 Hz
+     text: "lora915_tx_test #173"
+[rx] link: good=173 lost=1 crc=1 PER=0.6%  SNR avg/min/max=9.6/9.2/10.0 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -98.0 dBm  SNR 9.5 dB  ferr -3179 Hz
+     text: "lora915_tx_test #174"
+[rx] link: good=174 lost=1 crc=1 PER=0.6%  SNR avg/min/max=9.6/9.2/10.0 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -85.0 dBm  SNR 10.0 dB  ferr -3163 Hz
+     text: "lora915_tx_test #175"
+[rx] link: good=175 lost=1 crc=1 PER=0.6%  SNR avg/min/max=9.6/9.2/10.0 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -91.0 dBm  SNR 9.5 dB  ferr -3163 Hz
+     text: "lora915_tx_test #176"
+[rx] link: good=176 lost=1 crc=1 PER=0.6%  SNR avg/min/max=9.6/9.2/10.0 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -96.0 dBm  SNR 9.5 dB  ferr -3179 Hz
+     text: "lora915_tx_test #177"
+[rx] link: good=177 lost=1 crc=1 PER=0.6%  SNR avg/min/max=9.6/9.2/10.0 dB (last 16)
+[rx] noise floor -116.0 dBm
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -100.0 dBm  SNR 9.0 dB  ferr -3179 Hz
+     text: "lora915_tx_test #179"
+[rx] link: good=178 lost=2 crc=1 PER=1.1%  SNR avg/min/max=9.6/9.0/10.0 dB (last 16)
+[rx] noise floor -115.0 dBm
+[rx] PACKET 20 B  RSSI -83.0 dBm  SNR 10.0 dB  ferr -3179 Hz
+     text: "lora915_tx_test #180"
+[rx] link: good=179 lost=2 crc=1 PER=1.1%  SNR avg/min/max=9.6/9.0/10.0 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] noise floor -78.0 dBm
+[rx] PACKET 20 B  RSSI -83.0 dBm  SNR 9.8 dB  ferr -3196 Hz
+     text: "lora915_tx_test #181"
+[rx] link: good=180 lost=2 crc=1 PER=1.1%  SNR avg/min/max=9.6/9.0/10.0 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -91.0 dBm  SNR 9.5 dB  ferr -3196 Hz
+     text: "lora915_tx_test #182"
+[rx] link: good=181 lost=2 crc=1 PER=1.1%  SNR avg/min/max=9.6/9.0/10.0 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -86.0 dBm  SNR 9.5 dB  ferr -3196 Hz
+     text: "lora915_tx_test #183"
+[rx] link: good=182 lost=2 crc=1 PER=1.1%  SNR avg/min/max=9.6/9.0/10.0 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -86.0 dBm  SNR 10.5 dB  ferr -3196 Hz
+     text: "lora915_tx_test #184"
+[rx] link: good=183 lost=2 crc=1 PER=1.1%  SNR avg/min/max=9.7/9.0/10.5 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -87.0 dBm  SNR 9.5 dB  ferr -3213 Hz
+     text: "lora915_tx_test #185"
+[rx] link: good=184 lost=2 crc=1 PER=1.1%  SNR avg/min/max=9.7/9.0/10.5 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -91.0 dBm  SNR 9.5 dB  ferr -3213 Hz
+     text: "lora915_tx_test #186"
+[rx] link: good=185 lost=2 crc=1 PER=1.1%  SNR avg/min/max=9.7/9.0/10.5 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -87.0 dBm  SNR 9.8 dB  ferr -3230 Hz
+     text: "lora915_tx_test #187"
+[rx] link: good=186 lost=2 crc=1 PER=1.1%  SNR avg/min/max=9.7/9.0/10.5 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -89.0 dBm  SNR 9.8 dB  ferr -3230 Hz
+     text: "lora915_tx_test #188"
+[rx] link: good=187 lost=2 crc=1 PER=1.1%  SNR avg/min/max=9.7/9.0/10.5 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -89.0 dBm  SNR 9.5 dB  ferr -3230 Hz
+     text: "lora915_tx_test #189"
+[rx] link: good=188 lost=2 crc=1 PER=1.1%  SNR avg/min/max=9.7/9.0/10.5 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -94.0 dBm  SNR 9.8 dB  ferr -3230 Hz
+     text: "lora915_tx_test #190"
+[rx] link: good=189 lost=2 crc=1 PER=1.0%  SNR avg/min/max=9.7/9.0/10.5 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -99.0 dBm  SNR 9.0 dB  ferr -3230 Hz
+     text: "lora915_tx_test #191"
+[rx] link: good=190 lost=2 crc=1 PER=1.0%  SNR avg/min/max=9.6/9.0/10.5 dB (last 16)
+[rx] noise floor -116.0 dBm
+[rx] PACKET 20 B  RSSI -88.0 dBm  SNR 9.5 dB  ferr -3246 Hz
+     text: "lora915_tx_test #192"
+[rx] link: good=191 lost=2 crc=1 PER=1.0%  SNR avg/min/max=9.6/9.0/10.5 dB (last 16)
+[rx] noise floor -116.0 dBm
+[rx] PACKET 20 B  RSSI -109.0 dBm  SNR 6.2 dB  ferr -3246 Hz
+     text: "lora915_tx_test #193"
+[rx] link: good=192 lost=2 crc=1 PER=1.0%  SNR avg/min/max=9.4/6.2/10.5 dB (last 16)
+[rx] noise floor -112.0 dBm
+[rx] PACKET 20 B  RSSI -97.0 dBm  SNR 9.2 dB  ferr -3246 Hz
+     text: "lora915_tx_test #194"
+[rx] link: good=193 lost=2 crc=1 PER=1.0%  SNR avg/min/max=9.4/6.2/10.5 dB (last 16)
+[rx] noise floor -116.0 dBm
+[rx] PACKET 20 B  RSSI -89.0 dBm  SNR 9.5 dB  ferr -3246 Hz
+     text: "lora915_tx_test #195"
+[rx] link: good=194 lost=2 crc=1 PER=1.0%  SNR avg/min/max=9.4/6.2/10.5 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -91.0 dBm  SNR 9.2 dB  ferr -3246 Hz
+     text: "lora915_tx_test #196"
+[rx] link: good=195 lost=2 crc=1 PER=1.0%  SNR avg/min/max=9.4/6.2/10.5 dB (last 16)
+[rx] noise floor -116.0 dBm
+[rx] PACKET 20 B  RSSI -95.0 dBm  SNR 9.5 dB  ferr -3263 Hz
+     text: "lora915_tx_test #197"
+[rx] link: good=196 lost=2 crc=1 PER=1.0%  SNR avg/min/max=9.3/6.2/10.5 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -93.0 dBm  SNR 10.2 dB  ferr -3263 Hz
+     text: "lora915_tx_test #198"
+[rx] link: good=197 lost=2 crc=1 PER=1.0%  SNR avg/min/max=9.4/6.2/10.5 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] noise floor -84.0 dBm
+[rx] PACKET 20 B  RSSI -90.0 dBm  SNR 9.5 dB  ferr -3263 Hz
+     text: "lora915_tx_test #199"
+[rx] link: good=198 lost=2 crc=1 PER=1.0%  SNR avg/min/max=9.4/6.2/10.5 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 20 B  RSSI -90.0 dBm  SNR 9.8 dB  ferr -3263 Hz
+     text: "lora915_tx_test #200"
+[rx] link: good=199 lost=2 crc=1 PER=1.0%  SNR avg/min/max=9.3/6.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -87.0 dBm  SNR 9.5 dB  ferr -3263 Hz
+     text: "lora915_tx_test #201"
+[rx] link: good=200 lost=2 crc=1 PER=1.0%  SNR avg/min/max=9.3/6.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -88.0 dBm  SNR 10.2 dB  ferr -3263 Hz
+     text: "lora915_tx_test #202"
+[rx] link: good=201 lost=2 crc=1 PER=1.0%  SNR avg/min/max=9.4/6.2/10.2 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 20 B  RSSI -88.0 dBm  SNR 9.5 dB  ferr -3280 Hz
+     text: "lora915_tx_test #203"
+[rx] link: good=202 lost=2 crc=1 PER=1.0%  SNR avg/min/max=9.4/6.2/10.2 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 20 B  RSSI -98.0 dBm  SNR 9.2 dB  ferr -3280 Hz
+     text: "lora915_tx_test #204"
+[rx] link: good=203 lost=2 crc=1 PER=1.0%  SNR avg/min/max=9.3/6.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -101.0 dBm  SNR 9.8 dB  ferr -3280 Hz
+     text: "lora915_tx_test #205"
+[rx] link: good=204 lost=2 crc=1 PER=1.0%  SNR avg/min/max=9.4/6.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -88.0 dBm  SNR 9.8 dB  ferr -3297 Hz
+     text: "lora915_tx_test #206"
+[rx] link: good=205 lost=2 crc=1 PER=1.0%  SNR avg/min/max=9.4/6.2/10.2 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -87.0 dBm  SNR 9.5 dB  ferr -3297 Hz
+     text: "lora915_tx_test #207"
+[rx] link: good=206 lost=2 crc=1 PER=1.0%  SNR avg/min/max=9.4/6.2/10.2 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -86.0 dBm  SNR 9.0 dB  ferr -3297 Hz
+     text: "lora915_tx_test #208"
+[rx] link: good=207 lost=2 crc=1 PER=1.0%  SNR avg/min/max=9.4/6.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -86.0 dBm  SNR 10.8 dB  ferr -3297 Hz
+     text: "lora915_tx_test #209"
+[rx] link: good=208 lost=2 crc=1 PER=1.0%  SNR avg/min/max=9.6/9.0/10.8 dB (last 16)
+[rx] noise floor -116.0 dBm
+[rx] PACKET 20 B  RSSI -84.0 dBm  SNR 10.0 dB  ferr -3297 Hz
+     text: "lora915_tx_test #210"
+[rx] link: good=209 lost=2 crc=1 PER=0.9%  SNR avg/min/max=9.7/9.0/10.8 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -82.0 dBm  SNR 9.8 dB  ferr -3314 Hz
+     text: "lora915_tx_test #211"
+[rx] link: good=210 lost=2 crc=1 PER=0.9%  SNR avg/min/max=9.7/9.0/10.8 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -90.0 dBm  SNR 10.0 dB  ferr -3297 Hz
+     text: "lora915_tx_test #212"
+[rx] link: good=211 lost=2 crc=1 PER=0.9%  SNR avg/min/max=9.8/9.0/10.8 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -83.0 dBm  SNR 9.8 dB  ferr -3314 Hz
+     text: "lora915_tx_test #213"
+[rx] link: good=212 lost=2 crc=1 PER=0.9%  SNR avg/min/max=9.8/9.0/10.8 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -87.0 dBm  SNR 9.8 dB  ferr -3314 Hz
+     text: "lora915_tx_test #214"
+[rx] link: good=213 lost=2 crc=1 PER=0.9%  SNR avg/min/max=9.7/9.0/10.8 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -82.0 dBm  SNR 9.5 dB  ferr -3314 Hz
+     text: "lora915_tx_test #215"
+[rx] link: good=214 lost=2 crc=1 PER=0.9%  SNR avg/min/max=9.7/9.0/10.8 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -86.0 dBm  SNR 10.0 dB  ferr -3330 Hz
+     text: "lora915_tx_test #216"
+[rx] link: good=215 lost=2 crc=1 PER=0.9%  SNR avg/min/max=9.8/9.0/10.8 dB (last 16)
+[rx] noise floor -129.0 dBm
+[rx] noise floor -80.0 dBm
+[rx] PACKET 20 B  RSSI -83.0 dBm  SNR 10.0 dB  ferr -3330 Hz
+     text: "lora915_tx_test #217"
+[rx] link: good=216 lost=2 crc=1 PER=0.9%  SNR avg/min/max=9.8/9.0/10.8 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -81.0 dBm  SNR 9.5 dB  ferr -3330 Hz
+     text: "lora915_tx_test #218"
+[rx] link: good=217 lost=2 crc=1 PER=0.9%  SNR avg/min/max=9.7/9.0/10.8 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -82.0 dBm  SNR 9.8 dB  ferr -3330 Hz
+     text: "lora915_tx_test #219"
+[rx] link: good=218 lost=2 crc=1 PER=0.9%  SNR avg/min/max=9.8/9.0/10.8 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -85.0 dBm  SNR 10.2 dB  ferr -3347 Hz
+     text: "lora915_tx_test #220"
+[rx] link: good=219 lost=2 crc=1 PER=0.9%  SNR avg/min/max=9.8/9.0/10.8 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -85.0 dBm  SNR 10.2 dB  ferr -3330 Hz
+     text: "lora915_tx_test #221"
+[rx] link: good=220 lost=2 crc=1 PER=0.9%  SNR avg/min/max=9.8/9.0/10.8 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 20 B  RSSI -87.0 dBm  SNR 10.0 dB  ferr -3330 Hz
+     text: "lora915_tx_test #222"
+[rx] link: good=221 lost=2 crc=1 PER=0.9%  SNR avg/min/max=9.9/9.0/10.8 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 20 B  RSSI -82.0 dBm  SNR 9.8 dB  ferr -3330 Hz
+     text: "lora915_tx_test #223"
+[rx] link: good=222 lost=2 crc=1 PER=0.9%  SNR avg/min/max=9.9/9.0/10.8 dB (last 16)
+[rx] noise floor -116.0 dBm
+[rx] PACKET 20 B  RSSI -87.0 dBm  SNR 9.8 dB  ferr -3330 Hz
+     text: "lora915_tx_test #224"
+[rx] link: good=223 lost=2 crc=1 PER=0.9%  SNR avg/min/max=9.9/9.5/10.8 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 20 B  RSSI -86.0 dBm  SNR 9.2 dB  ferr -3330 Hz
+     text: "lora915_tx_test #225"
+[rx] link: good=224 lost=2 crc=1 PER=0.9%  SNR avg/min/max=9.8/9.2/10.2 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -86.0 dBm  SNR 9.2 dB  ferr -3330 Hz
+     text: "lora915_tx_test #226"
+[rx] link: good=225 lost=2 crc=1 PER=0.9%  SNR avg/min/max=9.8/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -86.0 dBm  SNR 9.8 dB  ferr -3347 Hz
+     text: "lora915_tx_test #227"
+[rx] link: good=226 lost=2 crc=1 PER=0.9%  SNR avg/min/max=9.8/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -85.0 dBm  SNR 9.5 dB  ferr -3347 Hz
+     text: "lora915_tx_test #228"
+[rx] link: good=227 lost=2 crc=1 PER=0.9%  SNR avg/min/max=9.8/9.2/10.2 dB (last 16)
+[rx] noise floor -125.0 dBm
+[rx] PACKET 20 B  RSSI -87.0 dBm  SNR 9.5 dB  ferr -3347 Hz
+     text: "lora915_tx_test #229"
+[rx] link: good=228 lost=2 crc=1 PER=0.9%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -79.0 dBm  SNR 9.5 dB  ferr -3347 Hz
+     text: "lora915_tx_test #230"
+[rx] link: good=229 lost=2 crc=1 PER=0.9%  SNR avg/min/max=9.7/9.2/10.2 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -103.0 dBm  SNR 9.0 dB  ferr -3347 Hz
+     text: "lora915_tx_test #231"
+[rx] link: good=230 lost=2 crc=1 PER=0.9%  SNR avg/min/max=9.7/9.0/10.2 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -92.0 dBm  SNR 9.5 dB  ferr -3347 Hz
+     text: "lora915_tx_test #232"
+[rx] link: good=231 lost=2 crc=1 PER=0.9%  SNR avg/min/max=9.7/9.0/10.2 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -77.0 dBm  SNR 9.5 dB  ferr -3347 Hz
+     text: "lora915_tx_test #233"
+[rx] link: good=232 lost=2 crc=1 PER=0.9%  SNR avg/min/max=9.6/9.0/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] noise floor -76.0 dBm
+[rx] PACKET 20 B  RSSI -81.0 dBm  SNR 9.5 dB  ferr -3347 Hz
+     text: "lora915_tx_test #234"
+[rx] link: good=233 lost=2 crc=1 PER=0.9%  SNR avg/min/max=9.6/9.0/10.2 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -82.0 dBm  SNR 9.5 dB  ferr -3347 Hz
+     text: "lora915_tx_test #235"
+[rx] link: good=234 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.6/9.0/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -82.0 dBm  SNR 10.0 dB  ferr -3364 Hz
+     text: "lora915_tx_test #236"
+[rx] link: good=235 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.6/9.0/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -84.0 dBm  SNR 9.2 dB  ferr -3364 Hz
+     text: "lora915_tx_test #237"
+[rx] link: good=236 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.5/9.0/10.0 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -84.0 dBm  SNR 10.0 dB  ferr -3364 Hz
+     text: "lora915_tx_test #238"
+[rx] link: good=237 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.5/9.0/10.0 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -84.0 dBm  SNR 9.2 dB  ferr -3364 Hz
+     text: "lora915_tx_test #239"
+[rx] link: good=238 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.5/9.0/10.0 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -81.0 dBm  SNR 9.5 dB  ferr -3364 Hz
+     text: "lora915_tx_test #240"
+[rx] link: good=239 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.5/9.0/10.0 dB (last 16)
+[rx] noise floor -125.0 dBm
+[rx] PACKET 20 B  RSSI -78.0 dBm  SNR 9.8 dB  ferr -3364 Hz
+     text: "lora915_tx_test #241"
+[rx] link: good=240 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.5/9.0/10.0 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 20 B  RSSI -81.0 dBm  SNR 10.0 dB  ferr -3364 Hz
+     text: "lora915_tx_test #242"
+[rx] link: good=241 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.6/9.0/10.0 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -86.0 dBm  SNR 10.0 dB  ferr -3381 Hz
+     text: "lora915_tx_test #243"
+[rx] link: good=242 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.6/9.0/10.0 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -82.0 dBm  SNR 9.5 dB  ferr -3381 Hz
+     text: "lora915_tx_test #244"
+[rx] link: good=243 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.6/9.0/10.0 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -89.0 dBm  SNR 9.8 dB  ferr -3381 Hz
+     text: "lora915_tx_test #245"
+[rx] link: good=244 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.6/9.0/10.0 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -82.0 dBm  SNR 9.8 dB  ferr -3364 Hz
+     text: "lora915_tx_test #246"
+[rx] link: good=245 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.6/9.0/10.0 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -87.0 dBm  SNR 9.8 dB  ferr -3364 Hz
+     text: "lora915_tx_test #247"
+[rx] link: good=246 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.7/9.2/10.0 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -87.0 dBm  SNR 9.5 dB  ferr -3364 Hz
+     text: "lora915_tx_test #248"
+[rx] link: good=247 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.7/9.2/10.0 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 20 B  RSSI -87.0 dBm  SNR 9.8 dB  ferr -3364 Hz
+     text: "lora915_tx_test #249"
+[rx] link: good=248 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.7/9.2/10.0 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -84.0 dBm  SNR 9.5 dB  ferr -3347 Hz
+     text: "lora915_tx_test #250"
+[rx] link: good=249 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.7/9.2/10.0 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -89.0 dBm  SNR 9.8 dB  ferr -3347 Hz
+     text: "lora915_tx_test #251"
+[rx] link: good=250 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.7/9.2/10.0 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] noise floor -84.0 dBm
+[rx] PACKET 20 B  RSSI -102.0 dBm  SNR 9.0 dB  ferr -3347 Hz
+     text: "lora915_tx_test #252"
+[rx] link: good=251 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.6/9.0/10.0 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -88.0 dBm  SNR 9.8 dB  ferr -3364 Hz
+     text: "lora915_tx_test #253"
+[rx] link: good=252 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.7/9.0/10.0 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -88.0 dBm  SNR 9.5 dB  ferr -3364 Hz
+     text: "lora915_tx_test #254"
+[rx] link: good=253 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.6/9.0/10.0 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -84.0 dBm  SNR 10.0 dB  ferr -3347 Hz
+     text: "lora915_tx_test #255"
+[rx] link: good=254 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.7/9.0/10.0 dB (last 16)
+[rx] noise floor -116.0 dBm
+[rx] PACKET 20 B  RSSI -89.0 dBm  SNR 9.8 dB  ferr -3347 Hz
+     text: "lora915_tx_test #256"
+[rx] link: good=255 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.7/9.0/10.0 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -77.0 dBm  SNR 9.8 dB  ferr -3347 Hz
+     text: "lora915_tx_test #257"
+[rx] link: good=256 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.7/9.0/10.0 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -84.0 dBm  SNR 9.8 dB  ferr -3330 Hz
+     text: "lora915_tx_test #258"
+[rx] link: good=257 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.7/9.0/10.0 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -80.0 dBm  SNR 9.8 dB  ferr -3347 Hz
+     text: "lora915_tx_test #259"
+[rx] link: good=258 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.7/9.0/10.0 dB (last 16)
+[rx] noise floor -120.0 dBm
+[rx] PACKET 20 B  RSSI -77.0 dBm  SNR 9.2 dB  ferr -3330 Hz
+     text: "lora915_tx_test #260"
+[rx] link: good=259 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.6/9.0/10.0 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -88.0 dBm  SNR 9.5 dB  ferr -3330 Hz
+     text: "lora915_tx_test #261"
+[rx] link: good=260 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.6/9.0/10.0 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -81.0 dBm  SNR 9.8 dB  ferr -3347 Hz
+     text: "lora915_tx_test #262"
+[rx] link: good=261 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.6/9.0/10.0 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -81.0 dBm  SNR 9.5 dB  ferr -3347 Hz
+     text: "lora915_tx_test #263"
+[rx] link: good=262 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.6/9.0/10.0 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -76.0 dBm  SNR 9.5 dB  ferr -3364 Hz
+     text: "lora915_tx_test #264"
+[rx] link: good=263 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.6/9.0/10.0 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -88.0 dBm  SNR 9.5 dB  ferr -3364 Hz
+     text: "lora915_tx_test #265"
+[rx] link: good=264 lost=2 crc=1 PER=0.8%  SNR avg/min/max=9.6/9.0/10.0 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -76.0 dBm  SNR 9.5 dB  ferr -3364 Hz
+     text: "lora915_tx_test #266"
+[rx] link: good=265 lost=2 crc=1 PER=0.7%  SNR avg/min/max=9.6/9.0/10.0 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -75.0 dBm  SNR 9.5 dB  ferr -3381 Hz
+     text: "lora915_tx_test #267"
+[rx] link: good=266 lost=2 crc=1 PER=0.7%  SNR avg/min/max=9.6/9.0/10.0 dB (last 16)
+[rx] noise floor -116.0 dBm
+[rx] PACKET 20 B  RSSI -77.0 dBm  SNR 9.2 dB  ferr -3381 Hz
+     text: "lora915_tx_test #268"
+[rx] link: good=267 lost=2 crc=1 PER=0.7%  SNR avg/min/max=9.6/9.2/10.0 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] noise floor -70.0 dBm
+[rx] PACKET 20 B  RSSI -74.0 dBm  SNR 9.8 dB  ferr -3381 Hz
+     text: "lora915_tx_test #269"
+[rx] link: good=268 lost=2 crc=1 PER=0.7%  SNR avg/min/max=9.6/9.2/10.0 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -78.0 dBm  SNR 9.8 dB  ferr -3381 Hz
+     text: "lora915_tx_test #270"
+[rx] link: good=269 lost=2 crc=1 PER=0.7%  SNR avg/min/max=9.6/9.2/10.0 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -76.0 dBm  SNR 9.8 dB  ferr -3381 Hz
+     text: "lora915_tx_test #271"
+[rx] link: good=270 lost=2 crc=1 PER=0.7%  SNR avg/min/max=9.6/9.2/9.8 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -70.0 dBm  SNR 10.2 dB  ferr -3381 Hz
+     text: "lora915_tx_test #272"
+[rx] link: good=271 lost=2 crc=1 PER=0.7%  SNR avg/min/max=9.6/9.2/10.2 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -75.0 dBm  SNR 9.5 dB  ferr -3381 Hz
+     text: "lora915_tx_test #273"
+[rx] link: good=272 lost=2 crc=1 PER=0.7%  SNR avg/min/max=9.6/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -75.0 dBm  SNR 9.2 dB  ferr -3397 Hz
+     text: "lora915_tx_test #274"
+[rx] link: good=273 lost=2 crc=1 PER=0.7%  SNR avg/min/max=9.6/9.2/10.2 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -75.0 dBm  SNR 9.8 dB  ferr -3364 Hz
+     text: "lora915_tx_test #275"
+[rx] link: good=274 lost=2 crc=1 PER=0.7%  SNR avg/min/max=9.6/9.2/10.2 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -74.0 dBm  SNR 9.8 dB  ferr -3364 Hz
+     text: "lora915_tx_test #276"
+[rx] link: good=275 lost=2 crc=1 PER=0.7%  SNR avg/min/max=9.6/9.2/10.2 dB (last 16)
+[rx] noise floor -116.0 dBm
+[rx] PACKET 20 B  RSSI -73.0 dBm  SNR 9.8 dB  ferr -3381 Hz
+     text: "lora915_tx_test #277"
+[rx] link: good=276 lost=2 crc=1 PER=0.7%  SNR avg/min/max=9.6/9.2/10.2 dB (last 16)
+[rx] noise floor -116.0 dBm
+[rx] PACKET 20 B  RSSI -71.0 dBm  SNR 9.8 dB  ferr -3364 Hz
+     text: "lora915_tx_test #278"
+[rx] link: good=277 lost=2 crc=1 PER=0.7%  SNR avg/min/max=9.6/9.2/10.2 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -73.0 dBm  SNR 9.5 dB  ferr -3364 Hz
+     text: "lora915_tx_test #279"
+[rx] link: good=278 lost=2 crc=1 PER=0.7%  SNR avg/min/max=9.6/9.2/10.2 dB (last 16)
+[rx] noise floor -115.0 dBm
+[rx] PACKET 20 B  RSSI -75.0 dBm  SNR 11.8 dB  ferr -3364 Hz
+     text: "lora915_tx_test #280"
+[rx] link: good=279 lost=2 crc=1 PER=0.7%  SNR avg/min/max=9.8/9.2/11.8 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -63.0 dBm  SNR 9.8 dB  ferr -3364 Hz
+     text: "lora915_tx_test #281"
+[rx] link: good=280 lost=2 crc=1 PER=0.7%  SNR avg/min/max=9.8/9.2/11.8 dB (last 16)
+[rx] noise floor -117.0 dBm
+[rx] PACKET 20 B  RSSI -59.0 dBm  SNR 9.8 dB  ferr -3364 Hz
+     text: "lora915_tx_test #282"
+[rx] link: good=281 lost=2 crc=1 PER=0.7%  SNR avg/min/max=9.8/9.2/11.8 dB (last 16)
+[rx] noise floor -118.0 dBm
+[rx] PACKET 20 B  RSSI -54.0 dBm  SNR 9.8 dB  ferr -3381 Hz
+     text: "lora915_tx_test #283"
+[rx] link: good=282 lost=2 crc=1 PER=0.7%  SNR avg/min/max=9.8/9.2/11.8 dB (last 16)
+[rx] noise floor -118.0 dBm
+---- Closed the serial port /dev/tty.usbmodem213401 ----
