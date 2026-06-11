@@ -15,7 +15,10 @@ The loader is tolerant of the junk a serial terminal interleaves:
 Returned DataFrame columns (always present, NaN/empty where N/A):
   timestamp_ms, role, freq_mhz, modulation, event, seq, len_bytes,
   rssi_dbm, snr_db, ferr_hz, good, lost, crc, per_pct, air_ms,
-  gps_lat, gps_lon, gps_alt_m, source
+  gps_lat, gps_lon, gps_alt_m, utc, source
+
+`utc` is the GPS UTC timestamp ("YYYY-MM-DDTHH:MM:SSZ", empty until the GPS
+resolves time). Older logs without the column load fine — it comes through NaN.
 
 `source` is the input file name, so several logs can be concatenated and still
 told apart.
@@ -32,7 +35,7 @@ import pandas as pd
 CSV_COLUMNS = [
     "timestamp_ms", "role", "freq_mhz", "modulation", "event", "seq",
     "len_bytes", "rssi_dbm", "snr_db", "ferr_hz", "good", "lost", "crc",
-    "per_pct", "air_ms", "gps_lat", "gps_lon", "gps_alt_m",
+    "per_pct", "air_ms", "gps_lat", "gps_lon", "gps_alt_m", "utc",
 ]
 
 NUMERIC_COLUMNS = [

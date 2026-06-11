@@ -43,12 +43,14 @@ status lines are prefixed `#` and skipped by the loader. Columns:
 ```
 timestamp_ms, role, freq_mhz, modulation, event, seq, len_bytes,
 rssi_dbm, snr_db, ferr_hz, good, lost, crc, per_pct, air_ms,
-gps_lat, gps_lon, gps_alt_m
+gps_lat, gps_lon, gps_alt_m, utc
 ```
 
 `freq_mhz` / `modulation` identify the band (915 lora / 433 gfsk). FSK captures
-leave `snr_db` / `ferr_hz` blank. The three `gps_*` columns are reserved for
-future GPS logging and are blank for now.
+leave `snr_db` / `ferr_hz` blank. `gps_lat` / `gps_lon` / `gps_alt_m` / `utc`
+come from the UART0 u-blox GPS each tool now configures (UBX NAV-PVT); they are
+blank until the module gets a fix, and on older captures recorded before the GPS
+was added.
 
 ## Notes
 

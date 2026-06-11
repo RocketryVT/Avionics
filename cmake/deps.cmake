@@ -83,6 +83,10 @@ if (NOT DEFINED NANOPB_PATH)
     set(NANOPB_PATH "${LIBS_ROOT}/Third_Party/nanopb" CACHE PATH "Path to nanopb")
 endif()
 
+if (NOT DEFINED LITTLEFS_PATH)
+    set(LITTLEFS_PATH "${LIBS_ROOT}/Third_Party/littlefs" CACHE PATH "Path to littlefs")
+endif()
+
 if (NOT DEFINED UBXLIB_PATH)
     set(UBXLIB_PATH "${LIBS_ROOT}/Third_Party/ubxlib" CACHE PATH "Path to ubxlib")
 endif()
