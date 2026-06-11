@@ -54,8 +54,15 @@ public:
         const int8_t init_power =
             ( cfg_.high_power && cfg_.tx_dbm > 13 ) ? 13 : cfg_.tx_dbm;
 
-        int err = radio_.begin( cfg_.freq_mhz, cfg_.br_kbps, cfg_.fdev_khz,
-                                cfg_.rx_bw_khz, init_power, cfg_.preamble );
+        ConfigFSK_t config;
+        config.frequency          = cfg_.freq_mhz;
+        config.bitRate            = cfg_.br_kbps;
+        config.frequencyDeviation = cfg_.fdev_khz;
+        config.receiverBandwidth  = cfg_.rx_bw_khz;
+        config.power              = init_power;
+        config.preambleLength     = cfg_.preamble;
+
+        int err = radio_.begin( config );
         if ( err != RADIOLIB_ERR_NONE ) return err;
 
         // Re-apply output power with PA boost flag for the HCW variant.

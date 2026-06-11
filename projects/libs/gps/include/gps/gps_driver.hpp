@@ -218,15 +218,21 @@ private:
     UbxParser   ubx_;
 };
 
+} // namespace gps
+
 // ===============================================================================
 // Platform transport wrappers
 // ===============================================================================
+// Pico SDK headers must be included outside any namespace — they declare types
+// (uart_inst_t, i2c_inst_t, time_us_64, …) that belong in the global namespace.
 
 #if defined(PICO_SDK_VERSION_MAJOR)
 
 #include "hardware/uart.h"
 #include "hardware/gpio.h"
 #include "hardware/i2c.h"
+
+namespace gps {
 
 // -- UART transport ---------------------------------------------------------
 class UartTransport {
@@ -296,6 +302,6 @@ private:
     uint8_t     addr_;
 };
 
-#endif // PICO_SDK_VERSION_MAJOR
-
 } // namespace gps
+
+#endif // PICO_SDK_VERSION_MAJOR

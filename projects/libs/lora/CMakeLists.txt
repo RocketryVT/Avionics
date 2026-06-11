@@ -5,8 +5,8 @@
 #
 # Targets exposed to consumers:
 #
-#   radio_hal   — INTERFACE: RadioLib 7.x (local) + PicoHal.h + SX1276Radio.hpp
-#                 + RF69Radio.hpp.  Link to use any RadioLib-backed radio.
+#   radio_hal   — INTERFACE: RadioLib 7.x (local) + PicoHal.h + radio wrappers.
+#                 Link to use any RadioLib-backed radio.
 #
 #   lr11xx      — Semtech LR11XX C driver + Pico SPI HAL (static library).
 
@@ -16,7 +16,7 @@
 if (NOT DEFINED RADIOLIB_PATH)
     get_filename_component(_lora_avionics_root
         "${CMAKE_CURRENT_LIST_DIR}/../../.." ABSOLUTE)
-    set(RADIOLIB_PATH "${_lora_avionics_root}/RadioLib-7.6.0")
+    set(RADIOLIB_PATH "${_lora_avionics_root}/RadioLib-7.7.1")
     unset(_lora_avionics_root)
 endif()
 
@@ -24,7 +24,7 @@ if (NOT EXISTS "${RADIOLIB_PATH}/CMakeLists.txt")
     message(FATAL_ERROR
         "RadioLib not found at '${RADIOLIB_PATH}'.\n"
         "Set RADIOLIB_PATH to the RadioLib-7.x source directory, or place "
-        "RadioLib-7.6.0/ next to the Avionics repository root.")
+        "RadioLib-7.7.1/ next to the Avionics repository root.")
 endif()
 
 set(RADIOLIB_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)

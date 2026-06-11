@@ -56,8 +56,15 @@ public:
     // Returns LORA_OK (0) on success, a negative RadioLib error code otherwise.
     int begin( const SX1276Config& cfg )
     {
-        return _radio.begin( cfg.freq_mhz, cfg.bw_khz, cfg.sf, cfg.cr,
-                             cfg.sync_word, cfg.tx_power, cfg.preamble );
+        ConfigLoRa_t config;
+        config.frequency       = cfg.freq_mhz;
+        config.bandwidth       = cfg.bw_khz;
+        config.spreadingFactor = cfg.sf;
+        config.codingRate      = cfg.cr;
+        config.syncWord        = cfg.sync_word;
+        config.power           = cfg.tx_power;
+        config.preambleLength  = cfg.preamble;
+        return _radio.begin( config );
     }
 
     // Enter continuous receive mode.

@@ -49,8 +49,15 @@ public:
 
     int begin() override
     {
-        return radio_.begin( cfg_.freq_mhz, cfg_.bw_khz, cfg_.sf, cfg_.cr,
-                             cfg_.sync_word, cfg_.tx_dbm, cfg_.preamble );
+        ConfigLoRa_t config;
+        config.frequency       = cfg_.freq_mhz;
+        config.bandwidth       = cfg_.bw_khz;
+        config.spreadingFactor = cfg_.sf;
+        config.codingRate      = cfg_.cr;
+        config.syncWord        = cfg_.sync_word;
+        config.power           = cfg_.tx_dbm;
+        config.preambleLength  = cfg_.preamble;
+        return radio_.begin( config );
     }
 
     void start_receive() override { radio_.startReceive(); }

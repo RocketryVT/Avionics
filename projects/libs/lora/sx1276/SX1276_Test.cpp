@@ -27,15 +27,16 @@ int main() {
     sleep_ms( 1000 );
     printf( "Initializing SX1276...\n" );
 
-    int state = radio.begin(
-        915.0,  // frequency MHz
-        125.0,  // bandwidth kHz
-        7,      // spreading factor
-        5,      // coding rate
-        0x12,   // sync word
-        20,     // output power dBm
-        8       // preamble length
-    );
+    ConfigLoRa_t config;
+    config.frequency       = 915.0f;
+    config.bandwidth       = 125.0f;
+    config.spreadingFactor = 7;
+    config.codingRate      = 5;
+    config.syncWord        = 0x12;
+    config.power           = 20;
+    config.preambleLength  = 8;
+
+    int state = radio.begin( config );
 
     if( state == RADIOLIB_ERR_NONE ) {
         printf( "SX1276 ready!\n" );
