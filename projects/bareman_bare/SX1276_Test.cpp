@@ -11,7 +11,7 @@
 #include <string.h>
 #include "SIGMA.hpp"
 
-// ── SPI / LoRa pin definitions ─────────────────────────────────────────────
+// -- SPI / LoRa pin definitions ---------------------------------------------
 #define PIN_SCK     26
 #define PIN_MOSI    27
 #define PIN_MISO    28
@@ -19,27 +19,27 @@
 #define PIN_DIO0    22
 #define PIN_RESET   23
 
-// ── GPS UART pin definitions ───────────────────────────────────────────────
+// -- GPS UART pin definitions -----------------------------------------------
 #define GPS_UART        uart0
 #define PIN_UART_TX     16
 #define PIN_UART_RX     17
 #define UART_BAUD       38400    // factory default after CFG-CFG reset
 
-// ── LED definitions ────────────────────────────────────────────────────────
+// -- LED definitions --------------------------------------------------------
 #define PIN_LED_TX      13
 
-// ── HAL and radio (global) ─────────────────────────────────────────────────
+// -- HAL and radio (global) -------------------------------------------------
 PicoHal hal( spi1, PIN_SCK, PIN_MOSI, PIN_MISO );
 SX1276 radio = new Module( &hal, PIN_NSS, PIN_DIO0, PIN_RESET, RADIOLIB_NC );
 
-// ── GPS state ──────────────────────────────────────────────────────────────
+// -- GPS state --------------------------------------------------------------
 static char  gps_line[256];
 static int   gps_idx = 0;
 static float gps_lat = 0.0f;
 static float gps_lon = 0.0f;
 static bool  gps_fix = false;
 
-// ── Read one NMEA sentence (non-blocking) ──────────────────────────────────
+// -- Read one NMEA sentence (non-blocking) ----------------------------------
 bool gps_read_line( char* buf, size_t max_len ) {
     while( uart_is_readable( GPS_UART ) ) {
         char c = uart_getc( GPS_UART );
@@ -60,7 +60,7 @@ bool gps_read_line( char* buf, size_t max_len ) {
     return false;
 }
 
-// ── Parse $GNRMC / $GPRMC ─────────────────────────────────────────────────
+// -- Parse $GNRMC / $GPRMC -------------------------------------------------
 bool parse_rmc( const char* sentence ) {
     if( strncmp( sentence, "$GNRMC", 6 ) != 0 &&
         strncmp( sentence, "$GPRMC", 6 ) != 0 ) return false;
@@ -102,7 +102,7 @@ bool parse_rmc( const char* sentence ) {
     return true;
 }
 
-// ── Entry point ────────────────────────────────────────────────────────────
+// -- Entry point ------------------------------------------------------------
 int main() {
     stdio_init_all();
 
@@ -122,15 +122,16 @@ int main() {
 
     printf( "Initializing SX1276...\n" );
 
-    int state = radio.begin(
-        915.0,   // frequency MHz
-        125.0,   // bandwidth kHz
-        7,       // spreading factor
-        5,       // coding rate
-        0x12,    // sync word
-        20,      // output power dBm
-        8        // preamble length
-    );
+    ConfigLoRa_t config;
+    config.frequency       = 915.0f;
+    config.bandwidth       = 125.0f;
+    config.spreadingFactor = 7;
+    config.codingRate      = 5;
+    config.syncWord        = 0x12;
+    config.power           = 20;
+    config.preambleLength  = 8;
+
+    int state = radio.begin( config );
 
     if( state == RADIOLIB_ERR_NONE ) {
         printf( "SX1276 ready!\n" );
