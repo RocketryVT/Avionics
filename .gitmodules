@@ -76,3 +76,7 @@
 	path = projects/rocket-cam
 	url = https://github.com/RocketryVT/rocket-cam
 	branch = main
+[submodule "projects/libs/Third_Party/littlefs"]
+	path = projects/libs/Third_Party/littlefs
+	url = https://github.com/littlefs-project/littlefs.git
+	tag = v2.11.3
