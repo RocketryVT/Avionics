@@ -15,7 +15,8 @@ The loader is tolerant of the junk a serial terminal interleaves:
 Returned DataFrame columns (always present, NaN/empty where N/A):
   timestamp_ms, role, freq_mhz, modulation, event, seq, len_bytes,
   rssi_dbm, snr_db, ferr_hz, good, lost, crc, per_pct, air_ms,
-  gps_lat, gps_lon, gps_alt_m, utc, source
+  gps_lat, gps_lon, gps_alt_m, utc,
+  tx_ms, tx_gps_lat, tx_gps_lon, tx_gps_alt_m, tx_utc, distance_m, source
 
 `utc` is the GPS UTC timestamp ("YYYY-MM-DDTHH:MM:SSZ", empty until the GPS
 resolves time). Older logs without the column load fine — it comes through NaN.
@@ -27,6 +28,7 @@ told apart.
 from __future__ import annotations
 
 import io
+import math
 import re
 from pathlib import Path
 
@@ -36,12 +38,14 @@ CSV_COLUMNS = [
     "timestamp_ms", "role", "freq_mhz", "modulation", "event", "seq",
     "len_bytes", "rssi_dbm", "snr_db", "ferr_hz", "good", "lost", "crc",
     "per_pct", "air_ms", "gps_lat", "gps_lon", "gps_alt_m", "utc",
+    "tx_ms", "tx_gps_lat", "tx_gps_lon", "tx_gps_alt_m", "tx_utc",
 ]
 
 NUMERIC_COLUMNS = [
     "timestamp_ms", "freq_mhz", "seq", "len_bytes", "rssi_dbm", "snr_db",
     "ferr_hz", "good", "lost", "crc", "per_pct", "air_ms",
     "gps_lat", "gps_lon", "gps_alt_m",
+    "tx_ms", "tx_gps_lat", "tx_gps_lon", "tx_gps_alt_m",
 ]
 
 _HEADER_FIRST = "timestamp_ms,role,freq_mhz"
@@ -148,6 +152,39 @@ def _load_legacy(text: str, source: str) -> pd.DataFrame:
     return df
 
 
+def _haversine_m(lat1, lon1, lat2, lon2) -> float:
+    r = 6371000.0
+    p1 = math.radians(lat1)
+    p2 = math.radians(lat2)
+    dp = math.radians(lat2 - lat1)
+    dl = math.radians(lon2 - lon1)
+    a = math.sin(dp / 2.0) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dl / 2.0) ** 2
+    return 2.0 * r * math.atan2(math.sqrt(a), math.sqrt(1.0 - a))
+
+
+def _add_distance(df: pd.DataFrame) -> pd.DataFrame:
+    df["distance_m"] = float("nan")
+    needed = {"gps_lat", "gps_lon", "tx_gps_lat", "tx_gps_lon"}
+    if not needed.issubset(df.columns):
+        return df
+
+    # Fill local GPS gaps within a capture. The RX GPS is usually stationary or
+    # slow-moving relative to packet cadence, and this lets nearby noise_floor
+    # rows supply a fix for packet rows that arrived between GPS updates.
+    for _, ix in df.groupby("source", dropna=False).groups.items():
+        idx = list(ix)
+        local_lat = df.loc[idx, "gps_lat"].ffill().bfill()
+        local_lon = df.loc[idx, "gps_lon"].ffill().bfill()
+        tx_lat = df.loc[idx, "tx_gps_lat"].ffill()
+        tx_lon = df.loc[idx, "tx_gps_lon"].ffill()
+
+        for row_idx, lat1, lon1, lat2, lon2 in zip(idx, local_lat, local_lon, tx_lat, tx_lon):
+            if pd.notna(lat1) and pd.notna(lon1) and pd.notna(lat2) and pd.notna(lon2):
+                df.at[row_idx, "distance_m"] = _haversine_m(float(lat1), float(lon1),
+                                                            float(lat2), float(lon2))
+    return df
+
+
 def load(path: str | Path) -> pd.DataFrame:
     """Load one log file (CSV or legacy) into a normalized DataFrame."""
     path = Path(path)
@@ -159,6 +196,7 @@ def load(path: str | Path) -> pd.DataFrame:
 
     for c in NUMERIC_COLUMNS:
         df[c] = pd.to_numeric(df[c], errors="coerce")
+    df = _add_distance(df)
     return df.reset_index(drop=True)
 
 
@@ -221,4 +259,8 @@ def summary_row(df: pd.DataFrame, name: str) -> dict:
         "tx_sent": int((tx["event"] == "tx_ok").sum()),
         "tx_fail": int((tx["event"] == "tx_fail").sum()),
         "air_ms_mean": stat(tx["air_ms"].dropna(), pd.Series.mean),
+        "distance_m_min": stat(pkts["distance_m"].dropna(), pd.Series.min)
+        if "distance_m" in pkts else "",
+        "distance_m_max": stat(pkts["distance_m"].dropna(), pd.Series.max)
+        if "distance_m" in pkts else "",
     }

@@ -24,6 +24,7 @@ For every test folder this script:
         rssi_over_time.png   — signal strength over time (the main comparison)
         rssi_over_seq.png    — RSSI vs packet sequence number
         snr_over_seq.png     — SNR vs seq (LoRa captures only)
+        rssi_over_distance.png — RSSI vs TX/RX GPS distance when available
         per_bar.png          — packet-error-rate per capture
         noise_floor.png      — channel noise floor over time
 
@@ -99,6 +100,7 @@ def process_test(test_dir: Path, plt) -> bool:
     _plot_over_time(loaded, test_dir, plt)
     _plot_over_seq(loaded, test_dir, plt)
     _plot_snr(loaded, test_dir, plt)
+    _plot_distance(loaded, test_dir, plt)
     _plot_per(summary, test_dir, plt)
     _plot_noise_floor(loaded, test_dir, plt)
     return True
@@ -173,6 +175,30 @@ def _plot_snr(loaded, test_dir: Path, plt) -> None:
     ax.legend()
     fig.tight_layout()
     fig.savefig(test_dir / "snr_over_seq.png", dpi=110)
+    plt.close(fig)
+
+
+def _plot_distance(loaded, test_dir: Path, plt) -> None:
+    fig, ax = plt.subplots(figsize=(11, 5))
+    plotted = False
+    for name, df in loaded:
+        pkts = _packets(df)
+        if ("distance_m" not in pkts or pkts.empty or
+                pkts["distance_m"].dropna().empty or
+                pkts["rssi_dbm"].dropna().empty):
+            continue
+        ax.plot(pkts["distance_m"], pkts["rssi_dbm"], ".", ms=4, alpha=0.7, label=name)
+        plotted = True
+    if not plotted:
+        plt.close(fig)
+        return
+    ax.set_xlabel("TX/RX GPS distance (m)")
+    ax.set_ylabel("RSSI (dBm)")
+    ax.set_title(f"{test_dir.name} — RSSI vs distance")
+    ax.grid(True, alpha=0.3)
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(test_dir / "rssi_over_distance.png", dpi=110)
     plt.close(fig)
 
 
