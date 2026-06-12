@@ -94,10 +94,22 @@ private:
             break;
 
         case State::Sync2:
-            state_ = (b == 0x62u) ? State::Class : State::Idle;
+            if (b == 0x62u) {
+                state_ = State::Class;
+            } else if (b == 0xB5u) {
+                // Repeated sync byte; stay armed for 0x62 instead of losing
+                // the next frame in streams like B5 62 B5 62 01 07...
+                state_ = State::Sync2;
+            } else {
+                state_ = State::Idle;
+            }
             break;
 
         case State::Class:
+            if (b == 0xB5u) {
+                state_ = State::Sync2;
+                break;
+            }
             cls_  = b;
             ck_a_ = b; ck_b_ = b;
             state_ = State::Id;
