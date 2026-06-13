@@ -1,0 +1,170 @@
+syntax = "proto3";
+
+package sigma2;
+
+// Swift type prefix for the generated SwiftProtobuf code (e.g. SG2Envelope).
+option swift_prefix = "SG2";
+
+// =============================================================================
+// SIGMA2 canonical protobuf schema
+//
+// This is the convergence target that will eventually replace both data.proto
+// (iOS telemetry) and ground_station.proto (MQTT). Everything rides inside a
+// single `Envelope` whose fields mirror the SIGMA2::HEADER concept from
+// SIGMA2.hpp (source/destination node, sequence, timestamp) plus a `oneof`
+// payload. Unlike the binary SIGMA2 frame (which adds start bytes + CRC for
+// LoRa/flash), protobuf transports such as BLE GATT and MQTT rely on the
+// transport for framing, so no magic bytes / CRC are encoded here.
+//
+// This pass fully specifies the camera / VTX control path; the telemetry
+// messages are intentionally minimal stubs to be fleshed out incrementally.
+// =============================================================================
+
+// Logical node identity. Mirrors SIGMA2::NodeID in SIGMA2.hpp. 0 = unknown for
+// a source, broadcast for a destination.
+enum NodeId {
+  NODE_UNDEFINED       = 0;
+  NODE_NOSE_CONE       = 1;
+  NODE_PAYLOAD         = 2;
+  NODE_EBAY            = 3;
+  NODE_ADS             = 4;
+  NODE_ANTENNA_TRACKER = 5;
+  NODE_STATIONARY_GS   = 6;
+  NODE_MOBILE_NODE1    = 7;
+  NODE_MOBILE_NODE2    = 8;
+  NODE_MOBILE_NODE3    = 9;
+  NODE_MOBILE_NODE4    = 10;
+  NODE_ROCKET_CAM      = 11;  // rocket-cam Pico W flight camera controller
+}
+
+// Flight state. Superset of pins.hpp::state_t (rocket-cam) and the SIGMA2.hpp
+// FLIGHT_STATE enum.
+enum FlightState {
+  FS_UNKNOWN  = 0;
+  FS_PAD      = 1;
+  FS_BOOST    = 2;
+  FS_COAST    = 3;
+  FS_APOGEE   = 4;
+  FS_RECOVERY = 5;
+  FS_LANDED   = 6;
+}
+
+// -----------------------------------------------------------------------------
+// Camera / VTX control
+// -----------------------------------------------------------------------------
+
+// RushFPV 3.3 GHz band. Values match pins.hpp::VtxBand.
+enum VtxBand {
+  VTX_BAND_A = 0;  // 3G3 BAND A: 3330-3470 MHz
+  VTX_BAND_B = 1;  // 3G3 BAND B: 3170-3310 MHz
+}
+
+// VTX power level. Order and values match pins.hpp::VtxPower so the firmware can
+// cast directly to VtxPower and resolve with vtx_power_mw().
+enum VtxPowerLevel {
+  VTX_PIT    = 0;  //   ~0 mW (pit mode / RF off)
+  VTX_25MW   = 1;  //   25 mW
+  VTX_200MW  = 2;  //  200 mW
+  VTX_1000MW = 3;  // 1000 mW
+  VTX_4000MW = 4;  // 4000 mW (max)
+}
+
+// Phone -> camera. Every field is `optional` so the device applies only the
+// fields the sender actually set (proto3 optional => nanopb has_ flags). If both
+// band/channel and freq_mhz are present, freq_mhz wins.
+message CameraCommand {
+  optional VtxBand       band           = 1;  // band for band+channel selection
+  optional uint32        channel        = 2;  // channel 1..8 (1-based, like the console)
+  optional uint32        freq_mhz       = 3;  // explicit frequency override in MHz
+  optional VtxPowerLevel power          = 4;  // VTX power level
+  optional bool          rf_enabled     = 5;  // true = RF on, false = pit mode
+  optional bool          camera_record  = 6;  // true = start recording, false = stop
+  optional bool          request_status = 7;  // ask the device to emit a CameraConfig
+}
+
+// Camera -> phone. Current device configuration / status snapshot.
+message CameraConfig {
+  VtxBand       band             = 1;
+  uint32        channel          = 2;   // 1..8, 0 if frequency is not on a known channel
+  uint32        freq_mhz         = 3;
+  VtxPowerLevel power            = 4;   // configured power level
+  uint32        actual_power_mw  = 5;   // measured output power (from VTX 'v' response)
+  bool          rf_enabled       = 6;   // false = pit mode
+  bool          camera_recording = 7;
+  FlightState   flight_state     = 8;
+  float         altitude_agl_m   = 9;
+  bool          vtx_responsive   = 10;  // last VTX query returned a valid response
+}
+
+// Acknowledgement for a received command (folded into the STATUS notify path).
+message CommandAck {
+  uint32 seq     = 1;
+  bool   ok      = 2;
+  string message = 3;
+}
+
+// -----------------------------------------------------------------------------
+// Telemetry (skeleton — to be fleshed out as data.proto / ground_station.proto
+// are migrated onto this schema)
+// -----------------------------------------------------------------------------
+
+message GpsData {
+  double lat      = 1;
+  double lon      = 2;
+  double alt_m    = 3;
+  uint32 num_sats = 4;
+  uint32 fix_type = 5;
+}
+
+message ImuData {
+  float accel_x = 1;
+  float accel_y = 2;
+  float accel_z = 3;
+  float gyro_x  = 4;
+  float gyro_y  = 5;
+  float gyro_z  = 6;
+}
+
+message BaroData {
+  float pressure_pa    = 1;
+  float temperature_c  = 2;
+  float altitude_m     = 3;
+}
+
+message FlightStatus {
+  FlightState state          = 1;
+  float       altitude_agl_m = 2;
+  float       climb_ms       = 3;
+}
+
+message Health {
+  float  battery_v       = 1;
+  float  temperature_c   = 2;
+  uint32 error_flags     = 3;
+  uint32 uptime_s        = 4;
+}
+
+// -----------------------------------------------------------------------------
+// Envelope — the single top-level message for every SIGMA2 protobuf transport.
+// -----------------------------------------------------------------------------
+
+message Envelope {
+  NodeId node_src     = 1;
+  NodeId node_dst     = 2;
+  uint32 seq          = 3;  // per-sender sequence number, wraps at 2^32
+  uint64 timestamp_ms = 4;  // sender time since boot in milliseconds
+
+  oneof payload {
+    // Camera / VTX control
+    CameraCommand cam_command = 10;
+    CameraConfig  cam_config  = 11;
+    CommandAck    ack         = 12;
+
+    // Telemetry (skeleton)
+    GpsData       gps          = 20;
+    ImuData       imu          = 21;
+    BaroData      baro         = 22;
+    FlightStatus  flight       = 23;
+    Health        health       = 24;
+  }
+}

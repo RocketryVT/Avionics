@@ -1,0 +1,5 @@
+# nanopb field options for SIGMA2_Proto.proto
+# Bound variable-length fields so the generated C structs are statically sized
+# (no malloc on the Pico). See nanopb/docs/concepts for syntax.
+
+sigma2.CommandAck.message  max_size:32
