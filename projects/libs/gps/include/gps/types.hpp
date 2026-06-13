@@ -80,6 +80,13 @@ enum class FixMode : uint8_t {
     Estimated    = 'E',
 };
 
+// Provenance for Coordinate::vel_*_mms.
+enum class NedVelocitySource : uint8_t {
+    None,
+    UbxNavPvt,          // Direct receiver-reported NED velocity.
+    NmeaPositionDelta,  // Calculated from consecutive NMEA lat/lon/alt fixes.
+};
+
 // ===============================================================================
 // Raw UBX payload structs
 //
@@ -161,10 +168,12 @@ struct Coordinate {
     float    speed_mps    = 0.0f;   // 2-D ground speed, m/s
     float    course_deg   = 0.0f;   // course over ground, degrees true (0–360)
 
-    // NED velocity — UBX-NAV-PVT only; zero when using NMEA
+    // NED velocity. Check ned_velocity_source to see whether this is direct
+    // receiver output or calculated by the parser.
     int32_t  vel_north_mms = 0;     // mm/s positive north
     int32_t  vel_east_mms  = 0;
     int32_t  vel_down_mms  = 0;     // positive = descending (useful for apogee detection)
+    NedVelocitySource ned_velocity_source = NedVelocitySource::None;
 
     // Accuracy estimates — UBX only; zero when using NMEA
     uint32_t h_acc_mm     = 0;

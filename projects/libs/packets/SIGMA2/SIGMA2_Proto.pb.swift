@@ -15,14 +15,14 @@ import SwiftProtobuf
 // incompatible with the version of SwiftProtobuf to which you are linking.
 // Please ensure that you are building against the same version of the API
 // that was used to generate this file.
-fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
+fileprivate nonisolated struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
   struct _2: SwiftProtobuf.ProtobufAPIVersion_2 {}
   typealias Version = _2
 }
 
 /// Logical node identity. Mirrors SIGMA2::NodeID in SIGMA2.hpp. 0 = unknown for
 /// a source, broadcast for a destination.
-enum SG2NodeId: SwiftProtobuf.Enum, Swift.CaseIterable {
+nonisolated enum SG2NodeId: SwiftProtobuf.Enum, Swift.CaseIterable {
   typealias RawValue = Int
   case nodeUndefined // = 0
   case nodeNoseCone // = 1
@@ -100,7 +100,7 @@ enum SG2NodeId: SwiftProtobuf.Enum, Swift.CaseIterable {
 
 /// Flight state. Superset of pins.hpp::state_t (rocket-cam) and the SIGMA2.hpp
 /// FLIGHT_STATE enum.
-enum SG2FlightState: SwiftProtobuf.Enum, Swift.CaseIterable {
+nonisolated enum SG2FlightState: SwiftProtobuf.Enum, Swift.CaseIterable {
   typealias RawValue = Int
   case fsUnknown // = 0
   case fsPad // = 1
@@ -155,7 +155,7 @@ enum SG2FlightState: SwiftProtobuf.Enum, Swift.CaseIterable {
 }
 
 /// RushFPV 3.3 GHz band. Values match pins.hpp::VtxBand.
-enum SG2VtxBand: SwiftProtobuf.Enum, Swift.CaseIterable {
+nonisolated enum SG2VtxBand: SwiftProtobuf.Enum, Swift.CaseIterable {
   typealias RawValue = Int
 
   /// 3G3 BAND A: 3330-3470 MHz
@@ -195,7 +195,7 @@ enum SG2VtxBand: SwiftProtobuf.Enum, Swift.CaseIterable {
 
 /// VTX power level. Order and values match pins.hpp::VtxPower so the firmware can
 /// cast directly to VtxPower and resolve with vtx_power_mw().
-enum SG2VtxPowerLevel: SwiftProtobuf.Enum, Swift.CaseIterable {
+nonisolated enum SG2VtxPowerLevel: SwiftProtobuf.Enum, Swift.CaseIterable {
   typealias RawValue = Int
 
   ///   ~0 mW (pit mode / RF off)
@@ -254,78 +254,78 @@ enum SG2VtxPowerLevel: SwiftProtobuf.Enum, Swift.CaseIterable {
 /// Phone -> camera. Every field is `optional` so the device applies only the
 /// fields the sender actually set (proto3 optional => nanopb has_ flags). If both
 /// band/channel and freq_mhz are present, freq_mhz wins.
-struct SG2CameraCommand: Sendable {
+nonisolated struct SG2CameraCommand: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
   /// band for band+channel selection
   var band: SG2VtxBand {
-    get {return _band ?? .a}
+    get {_band ?? .a}
     set {_band = newValue}
   }
   /// Returns true if `band` has been explicitly set.
-  var hasBand: Bool {return self._band != nil}
+  var hasBand: Bool {self._band != nil}
   /// Clears the value of `band`. Subsequent reads from it will return its default value.
   mutating func clearBand() {self._band = nil}
 
   /// channel 1..8 (1-based, like the console)
   var channel: UInt32 {
-    get {return _channel ?? 0}
+    get {_channel ?? 0}
     set {_channel = newValue}
   }
   /// Returns true if `channel` has been explicitly set.
-  var hasChannel: Bool {return self._channel != nil}
+  var hasChannel: Bool {self._channel != nil}
   /// Clears the value of `channel`. Subsequent reads from it will return its default value.
   mutating func clearChannel() {self._channel = nil}
 
   /// explicit frequency override in MHz
   var freqMhz: UInt32 {
-    get {return _freqMhz ?? 0}
+    get {_freqMhz ?? 0}
     set {_freqMhz = newValue}
   }
   /// Returns true if `freqMhz` has been explicitly set.
-  var hasFreqMhz: Bool {return self._freqMhz != nil}
+  var hasFreqMhz: Bool {self._freqMhz != nil}
   /// Clears the value of `freqMhz`. Subsequent reads from it will return its default value.
   mutating func clearFreqMhz() {self._freqMhz = nil}
 
   /// VTX power level
   var power: SG2VtxPowerLevel {
-    get {return _power ?? .vtxPit}
+    get {_power ?? .vtxPit}
     set {_power = newValue}
   }
   /// Returns true if `power` has been explicitly set.
-  var hasPower: Bool {return self._power != nil}
+  var hasPower: Bool {self._power != nil}
   /// Clears the value of `power`. Subsequent reads from it will return its default value.
   mutating func clearPower() {self._power = nil}
 
   /// true = RF on, false = pit mode
   var rfEnabled: Bool {
-    get {return _rfEnabled ?? false}
+    get {_rfEnabled ?? false}
     set {_rfEnabled = newValue}
   }
   /// Returns true if `rfEnabled` has been explicitly set.
-  var hasRfEnabled: Bool {return self._rfEnabled != nil}
+  var hasRfEnabled: Bool {self._rfEnabled != nil}
   /// Clears the value of `rfEnabled`. Subsequent reads from it will return its default value.
   mutating func clearRfEnabled() {self._rfEnabled = nil}
 
   /// true = start recording, false = stop
   var cameraRecord: Bool {
-    get {return _cameraRecord ?? false}
+    get {_cameraRecord ?? false}
     set {_cameraRecord = newValue}
   }
   /// Returns true if `cameraRecord` has been explicitly set.
-  var hasCameraRecord: Bool {return self._cameraRecord != nil}
+  var hasCameraRecord: Bool {self._cameraRecord != nil}
   /// Clears the value of `cameraRecord`. Subsequent reads from it will return its default value.
   mutating func clearCameraRecord() {self._cameraRecord = nil}
 
   /// ask the device to emit a CameraConfig
   var requestStatus: Bool {
-    get {return _requestStatus ?? false}
+    get {_requestStatus ?? false}
     set {_requestStatus = newValue}
   }
   /// Returns true if `requestStatus` has been explicitly set.
-  var hasRequestStatus: Bool {return self._requestStatus != nil}
+  var hasRequestStatus: Bool {self._requestStatus != nil}
   /// Clears the value of `requestStatus`. Subsequent reads from it will return its default value.
   mutating func clearRequestStatus() {self._requestStatus = nil}
 
@@ -343,7 +343,7 @@ struct SG2CameraCommand: Sendable {
 }
 
 /// Camera -> phone. Current device configuration / status snapshot.
-struct SG2CameraConfig: Sendable {
+nonisolated struct SG2CameraConfig: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -379,7 +379,7 @@ struct SG2CameraConfig: Sendable {
 }
 
 /// Acknowledgement for a received command (folded into the STATUS notify path).
-struct SG2CommandAck: Sendable {
+nonisolated struct SG2CommandAck: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -395,7 +395,7 @@ struct SG2CommandAck: Sendable {
   init() {}
 }
 
-struct SG2GpsData: Sendable {
+nonisolated struct SG2GpsData: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -415,7 +415,7 @@ struct SG2GpsData: Sendable {
   init() {}
 }
 
-struct SG2ImuData: Sendable {
+nonisolated struct SG2ImuData: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -437,7 +437,7 @@ struct SG2ImuData: Sendable {
   init() {}
 }
 
-struct SG2BaroData: Sendable {
+nonisolated struct SG2BaroData: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -453,7 +453,7 @@ struct SG2BaroData: Sendable {
   init() {}
 }
 
-struct SG2FlightStatus: Sendable {
+nonisolated struct SG2FlightStatus: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -469,7 +469,7 @@ struct SG2FlightStatus: Sendable {
   init() {}
 }
 
-struct SG2Health: Sendable {
+nonisolated struct SG2Health: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -487,7 +487,7 @@ struct SG2Health: Sendable {
   init() {}
 }
 
-struct SG2Envelope: Sendable {
+nonisolated struct SG2Envelope: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -572,7 +572,7 @@ struct SG2Envelope: Sendable {
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  enum OneOf_Payload: Equatable, Sendable {
+  nonisolated enum OneOf_Payload: Equatable, Sendable {
     /// Camera / VTX control
     case camCommand(SG2CameraCommand)
     case camConfig(SG2CameraConfig)
@@ -591,65 +591,27 @@ struct SG2Envelope: Sendable {
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
-fileprivate let _protobuf_package = "sigma2"
+fileprivate nonisolated let _protobuf_package = "sigma2"
 
-extension SG2NodeId: SwiftProtobuf._ProtoNameProviding {
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "NODE_UNDEFINED"),
-    1: .same(proto: "NODE_NOSE_CONE"),
-    2: .same(proto: "NODE_PAYLOAD"),
-    3: .same(proto: "NODE_EBAY"),
-    4: .same(proto: "NODE_ADS"),
-    5: .same(proto: "NODE_ANTENNA_TRACKER"),
-    6: .same(proto: "NODE_STATIONARY_GS"),
-    7: .same(proto: "NODE_MOBILE_NODE1"),
-    8: .same(proto: "NODE_MOBILE_NODE2"),
-    9: .same(proto: "NODE_MOBILE_NODE3"),
-    10: .same(proto: "NODE_MOBILE_NODE4"),
-    11: .same(proto: "NODE_ROCKET_CAM"),
-  ]
+nonisolated extension SG2NodeId: SwiftProtobuf._ProtoNameProviding {
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0NODE_UNDEFINED\0\u{1}NODE_NOSE_CONE\0\u{1}NODE_PAYLOAD\0\u{1}NODE_EBAY\0\u{1}NODE_ADS\0\u{1}NODE_ANTENNA_TRACKER\0\u{1}NODE_STATIONARY_GS\0\u{1}NODE_MOBILE_NODE1\0\u{1}NODE_MOBILE_NODE2\0\u{1}NODE_MOBILE_NODE3\0\u{1}NODE_MOBILE_NODE4\0\u{1}NODE_ROCKET_CAM\0")
 }
 
-extension SG2FlightState: SwiftProtobuf._ProtoNameProviding {
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "FS_UNKNOWN"),
-    1: .same(proto: "FS_PAD"),
-    2: .same(proto: "FS_BOOST"),
-    3: .same(proto: "FS_COAST"),
-    4: .same(proto: "FS_APOGEE"),
-    5: .same(proto: "FS_RECOVERY"),
-    6: .same(proto: "FS_LANDED"),
-  ]
+nonisolated extension SG2FlightState: SwiftProtobuf._ProtoNameProviding {
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0FS_UNKNOWN\0\u{1}FS_PAD\0\u{1}FS_BOOST\0\u{1}FS_COAST\0\u{1}FS_APOGEE\0\u{1}FS_RECOVERY\0\u{1}FS_LANDED\0")
 }
 
-extension SG2VtxBand: SwiftProtobuf._ProtoNameProviding {
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "VTX_BAND_A"),
-    1: .same(proto: "VTX_BAND_B"),
-  ]
+nonisolated extension SG2VtxBand: SwiftProtobuf._ProtoNameProviding {
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0VTX_BAND_A\0\u{1}VTX_BAND_B\0")
 }
 
-extension SG2VtxPowerLevel: SwiftProtobuf._ProtoNameProviding {
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "VTX_PIT"),
-    1: .same(proto: "VTX_25MW"),
-    2: .same(proto: "VTX_200MW"),
-    3: .same(proto: "VTX_1000MW"),
-    4: .same(proto: "VTX_4000MW"),
-  ]
+nonisolated extension SG2VtxPowerLevel: SwiftProtobuf._ProtoNameProviding {
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0VTX_PIT\0\u{1}VTX_25MW\0\u{1}VTX_200MW\0\u{1}VTX_1000MW\0\u{1}VTX_4000MW\0")
 }
 
-extension SG2CameraCommand: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension SG2CameraCommand: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".CameraCommand"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "band"),
-    2: .same(proto: "channel"),
-    3: .standard(proto: "freq_mhz"),
-    4: .same(proto: "power"),
-    5: .standard(proto: "rf_enabled"),
-    6: .standard(proto: "camera_record"),
-    7: .standard(proto: "request_status"),
-  ]
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}band\0\u{1}channel\0\u{3}freq_mhz\0\u{1}power\0\u{3}rf_enabled\0\u{3}camera_record\0\u{3}request_status\0")
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -711,20 +673,9 @@ extension SG2CameraCommand: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
   }
 }
 
-extension SG2CameraConfig: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension SG2CameraConfig: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".CameraConfig"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "band"),
-    2: .same(proto: "channel"),
-    3: .standard(proto: "freq_mhz"),
-    4: .same(proto: "power"),
-    5: .standard(proto: "actual_power_mw"),
-    6: .standard(proto: "rf_enabled"),
-    7: .standard(proto: "camera_recording"),
-    8: .standard(proto: "flight_state"),
-    9: .standard(proto: "altitude_agl_m"),
-    10: .standard(proto: "vtx_responsive"),
-  ]
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}band\0\u{1}channel\0\u{3}freq_mhz\0\u{1}power\0\u{3}actual_power_mw\0\u{3}rf_enabled\0\u{3}camera_recording\0\u{3}flight_state\0\u{3}altitude_agl_m\0\u{3}vtx_responsive\0")
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -797,13 +748,9 @@ extension SG2CameraConfig: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
   }
 }
 
-extension SG2CommandAck: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension SG2CommandAck: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".CommandAck"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "seq"),
-    2: .same(proto: "ok"),
-    3: .same(proto: "message"),
-  ]
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}seq\0\u{1}ok\0\u{1}message\0")
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -841,15 +788,9 @@ extension SG2CommandAck: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
   }
 }
 
-extension SG2GpsData: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension SG2GpsData: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".GpsData"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "lat"),
-    2: .same(proto: "lon"),
-    3: .standard(proto: "alt_m"),
-    4: .standard(proto: "num_sats"),
-    5: .standard(proto: "fix_type"),
-  ]
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}lat\0\u{1}lon\0\u{3}alt_m\0\u{3}num_sats\0\u{3}fix_type\0")
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -897,16 +838,9 @@ extension SG2GpsData: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
   }
 }
 
-extension SG2ImuData: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension SG2ImuData: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".ImuData"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "accel_x"),
-    2: .standard(proto: "accel_y"),
-    3: .standard(proto: "accel_z"),
-    4: .standard(proto: "gyro_x"),
-    5: .standard(proto: "gyro_y"),
-    6: .standard(proto: "gyro_z"),
-  ]
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}accel_x\0\u{3}accel_y\0\u{3}accel_z\0\u{3}gyro_x\0\u{3}gyro_y\0\u{3}gyro_z\0")
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -959,13 +893,9 @@ extension SG2ImuData: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
   }
 }
 
-extension SG2BaroData: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension SG2BaroData: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".BaroData"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "pressure_pa"),
-    2: .standard(proto: "temperature_c"),
-    3: .standard(proto: "altitude_m"),
-  ]
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}pressure_pa\0\u{3}temperature_c\0\u{3}altitude_m\0")
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -1003,13 +933,9 @@ extension SG2BaroData: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementati
   }
 }
 
-extension SG2FlightStatus: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension SG2FlightStatus: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".FlightStatus"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "state"),
-    2: .standard(proto: "altitude_agl_m"),
-    3: .standard(proto: "climb_ms"),
-  ]
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}state\0\u{3}altitude_agl_m\0\u{3}climb_ms\0")
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -1047,14 +973,9 @@ extension SG2FlightStatus: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
   }
 }
 
-extension SG2Health: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension SG2Health: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".Health"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "battery_v"),
-    2: .standard(proto: "temperature_c"),
-    3: .standard(proto: "error_flags"),
-    4: .standard(proto: "uptime_s"),
-  ]
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}battery_v\0\u{3}temperature_c\0\u{3}error_flags\0\u{3}uptime_s\0")
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -1097,22 +1018,9 @@ extension SG2Health: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
   }
 }
 
-extension SG2Envelope: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension SG2Envelope: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".Envelope"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "node_src"),
-    2: .standard(proto: "node_dst"),
-    3: .same(proto: "seq"),
-    4: .standard(proto: "timestamp_ms"),
-    10: .standard(proto: "cam_command"),
-    11: .standard(proto: "cam_config"),
-    12: .same(proto: "ack"),
-    20: .same(proto: "gps"),
-    21: .same(proto: "imu"),
-    22: .same(proto: "baro"),
-    23: .same(proto: "flight"),
-    24: .same(proto: "health"),
-  ]
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}node_src\0\u{3}node_dst\0\u{1}seq\0\u{3}timestamp_ms\0\u{4}\u{6}cam_command\0\u{3}cam_config\0\u{1}ack\0\u{2}\u{8}gps\0\u{1}imu\0\u{1}baro\0\u{1}flight\0\u{1}health\0")
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {

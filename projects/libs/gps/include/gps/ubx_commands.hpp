@@ -437,14 +437,27 @@ inline void end(UbxFrame& f, std::size_t len_idx) noexcept {
     return raw_valset_u8(0x20110011u, mode, layers);
 }
 
+enum class DynModel : uint8_t {
+    Portable   = 0,
+    Stationary = 2,
+    Pedestrian = 3,
+    Automotive = 4,
+    Sea        = 5,
+    Airborne1g = 6,
+    Airborne2g = 7,
+    Airborne4g = 8,
+};
+
 // --- CFG-NAVSPG-DYNMODEL (key 0x20110021) ------------------------------------
+//
 // 0=portable 2=stationary 3=pedestrian 4=automotive 5=sea
+//
 // 6=air<1g  7=air<2g  8=air<4g (AIR4 — use for rockets)
 [[nodiscard]] inline UbxFrame valset_dyn_model(
-    uint8_t model = 8,
+    DynModel model = DynModel::Airborne4g,
     ValLayer layers = ValLayer::RAM | ValLayer::BBR | ValLayer::Flash) noexcept
 {
-    return raw_valset_u8(0x20110021u, model, layers);
+    return raw_valset_u8(0x20110021u, static_cast<uint8_t>(model), layers);
 }
 
 // --- CFG-UART1INPROT-UBX (key 0x10730001) ------------------------------------

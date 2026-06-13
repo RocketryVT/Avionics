@@ -3,18 +3,8 @@
 // gps/ubx_parser.hpp — UBX binary protocol parser
 //
 // Parses the UBX binary stream from a u-blox module and writes decoded fields
-// into a Coordinate reference supplied at construction.
-//
-// Can be used standalone:
-//
-//   gps::Coordinate  coord;
-//   gps::Diagnostics diag;
-//   gps::UbxParser   ubx(coord, diag);
-//   while (uart_is_readable(uart0))
-//       ubx.feed(uart_getc(uart0));
-//   if (coord.valid) { ... }
-//
-// Or let GpsDriver own it alongside NmeaParser — see gps_driver.hpp.
+// into a Coordinate reference supplied at construction. Internal to
+// gps_driver.hpp; user code should use GpsDriver/PicoGpsDriver.
 //
 // Messages decoded
 // ----------------
@@ -236,6 +226,7 @@ private:
 
         if (!(pvt.flags & 0x01u)) {   // gnssFixOK clear — no valid fix
             coord_.valid = false;
+            coord_.ned_velocity_source = NedVelocitySource::None;
             return;
         }
 
@@ -258,6 +249,7 @@ private:
         coord_.vel_north_mms = pvt.velN;
         coord_.vel_east_mms  = pvt.velE;
         coord_.vel_down_mms  = pvt.velD;
+        coord_.ned_velocity_source = NedVelocitySource::UbxNavPvt;
         coord_.speed_mps     = static_cast<float>(pvt.gSpeed)  * 0.001f;
         coord_.course_deg    = static_cast<float>(pvt.headMot) * 1e-5f;
         coord_.valid         = true;
