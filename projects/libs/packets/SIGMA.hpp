@@ -48,8 +48,8 @@
 // Inter-Pico UDP note:
 //   The secondary Pico (low-gain LoRa hub) forwards received packets to the
 //   primary Pico (antenna tracker) immediately on receipt - no field-gathering
-//   delay.  InterPico::Payload mirrors LoRa::Payload exactly and appends only
-//   RSSI + SNR from the radio driver.  Both are packed into the same framing.
+//   delay.  InterPico::Payload mirrors LoRa::Payload and appends radio metadata
+//   plus optional SIGMA2 vector/accuracy fields when the source packet has them.
 
 #include <stddef.h>
 #include <stdint.h>
@@ -176,11 +176,15 @@ static_assert(sizeof(LoRa) == 36, "Wire::LoRa layout changed");
 //
 // Offset  Size  Field
 //      0    36  (same as Wire::LoRa)
-//     36     1  rssi           receive RSSI, dBm (int8_t)
-//     37     1  snr_q2         SNR x 4, dB  (int8_t, ÷4 -> float dB)
-//     38     2  _pad[2]
+//     36     6  vel_*_cms      NED velocity, cm/s
+//     42     6  *_acc_*        GPS h/v/s accuracy, cm or cm/s
+//     48     6  acc_*_mg       fused NED acceleration, milli-g
+//     54     1  nav_source     SIGMA2 nav-source bitfield when available
+//     55     1  rssi           receive RSSI, dBm (int8_t)
+//     56     1  snr_q2         SNR x 4, dB  (int8_t, ÷4 -> float dB)
+//     57     3  _pad[3]
 //    ----   --
-//     40 bytes
+//     60 bytes
 struct InterPico {
     // -- LoRa fields (identical layout to Wire::LoRa) -------------------------
     uint32_t boot_ms;
@@ -190,16 +194,25 @@ struct InterPico {
     int32_t  alt_gps_cm;
     int16_t  q[4];
     uint16_t speed_cms;
+    int16_t  vel_n_cms;
+    int16_t  vel_e_cms;
+    int16_t  vel_d_cms;
+    uint16_t h_acc_cm;
+    uint16_t v_acc_cm;
+    uint16_t s_acc_cms;
+    int16_t  acc_n_mg;
+    int16_t  acc_e_mg;
+    int16_t  acc_d_mg;
+    uint8_t  nav_source;
     uint8_t  state;
     uint8_t  satellites;
     uint8_t  flags;
-    uint8_t  _pad0[3];
     // -- Radio metadata (appended by secondary Pico) ---------------------------
     int8_t   rssi;          ///< receive RSSI, dBm
     int8_t   snr_q2;        ///< SNR x 4, dB  (÷4 -> float dB)
-    uint8_t  _pad1[2];
+    uint8_t  _pad[3];
 };
-static_assert(sizeof(InterPico) == 40, "Wire::InterPico layout changed");
+static_assert(sizeof(InterPico) == 60, "Wire::InterPico layout changed");
 
 // -- WiFi / Full Telemetry -----------------------------------------------------
 // Sent over WiFi or USB.  Uses float/double - no conversion before use.
@@ -667,6 +680,12 @@ struct InterPicoData {
     float       alt_gps_m   = 0.0f;
     float       q[4]        = {1,0,0,0};
     float       speed_ms    = 0.0f;
+    float       vel_ned_ms[3] = {0.0f, 0.0f, 0.0f};
+    float       h_acc_m     = 0.0f;
+    float       v_acc_m     = 0.0f;
+    float       s_acc_ms    = 0.0f;
+    float       acc_ned_ms2[3] = {0.0f, 0.0f, 0.0f};
+    uint8_t     nav_source  = 0;
     FlightState state       = FlightState::GROUND_IDLE;
     uint8_t     satellites  = 0;
     uint8_t     flags       = 0;
@@ -702,13 +721,22 @@ struct InterPicoData {
         p.alt_gps_cm  = Convert::gps_alt_to_wire(alt_gps_m);
         for (int i = 0; i < 4; ++i) p.q[i] = Convert::quat_to_wire(q[i]);
         p.speed_cms   = Convert::speed_to_wire(speed_ms);
+        p.vel_n_cms   = static_cast<int16_t>(vel_ned_ms[0] * SPEED_SCALE);
+        p.vel_e_cms   = static_cast<int16_t>(vel_ned_ms[1] * SPEED_SCALE);
+        p.vel_d_cms   = static_cast<int16_t>(vel_ned_ms[2] * SPEED_SCALE);
+        p.h_acc_cm    = static_cast<uint16_t>(h_acc_m * GPS_ALT_SCALE);
+        p.v_acc_cm    = static_cast<uint16_t>(v_acc_m * GPS_ALT_SCALE);
+        p.s_acc_cms   = static_cast<uint16_t>(s_acc_ms * SPEED_SCALE);
+        p.acc_n_mg    = static_cast<int16_t>((acc_ned_ms2[0] / 9.80665f) * ACCEL_SCALE);
+        p.acc_e_mg    = static_cast<int16_t>((acc_ned_ms2[1] / 9.80665f) * ACCEL_SCALE);
+        p.acc_d_mg    = static_cast<int16_t>((acc_ned_ms2[2] / 9.80665f) * ACCEL_SCALE);
+        p.nav_source  = nav_source;
         p.state       = static_cast<uint8_t>(state);
         p.satellites  = satellites;
         p.flags       = flags;
-        p._pad0[0] = p._pad0[1] = p._pad0[2] = 0;
         p.rssi        = static_cast<int8_t>(rssi);
         p.snr_q2      = Convert::snr_to_wire(snr_dB);
-        p._pad1[0] = p._pad1[1] = 0;
+        p._pad[0] = p._pad[1] = p._pad[2] = 0;
         return p;
     }
 
@@ -727,6 +755,16 @@ struct InterPicoData {
         d.alt_gps_m  = Convert::gps_alt_from_wire(p.alt_gps_cm);
         for (int i = 0; i < 4; ++i) d.q[i] = Convert::quat_from_wire(p.q[i]);
         d.speed_ms   = Convert::speed_from_wire(p.speed_cms);
+        d.vel_ned_ms[0] = static_cast<float>(p.vel_n_cms) / SPEED_SCALE;
+        d.vel_ned_ms[1] = static_cast<float>(p.vel_e_cms) / SPEED_SCALE;
+        d.vel_ned_ms[2] = static_cast<float>(p.vel_d_cms) / SPEED_SCALE;
+        d.h_acc_m    = static_cast<float>(p.h_acc_cm) / GPS_ALT_SCALE;
+        d.v_acc_m    = static_cast<float>(p.v_acc_cm) / GPS_ALT_SCALE;
+        d.s_acc_ms   = static_cast<float>(p.s_acc_cms) / SPEED_SCALE;
+        d.acc_ned_ms2[0] = (static_cast<float>(p.acc_n_mg) / ACCEL_SCALE) * 9.80665f;
+        d.acc_ned_ms2[1] = (static_cast<float>(p.acc_e_mg) / ACCEL_SCALE) * 9.80665f;
+        d.acc_ned_ms2[2] = (static_cast<float>(p.acc_d_mg) / ACCEL_SCALE) * 9.80665f;
+        d.nav_source = p.nav_source;
         d.state      = static_cast<FlightState>(p.state);
         d.satellites = p.satellites;
         d.flags      = p.flags;

@@ -28,6 +28,8 @@ struct Config {
     int8_t  tx_dbm     = 20;      // +20 dBm max with PA boost (HCW variant)
     bool    high_power = true;    // true for RFM69HCW (PA boost)
     uint8_t preamble   = 16;      // preamble length in bits
+    uint8_t sync_word[2] = { 0x2D, 0x01 };
+    uint8_t sync_word_len = 2;
 };
 
 // -- Driver --------------------------------------------------------------------
@@ -63,6 +65,9 @@ public:
         config.preambleLength     = cfg_.preamble;
 
         int err = radio_.begin( config );
+        if ( err != RADIOLIB_ERR_NONE ) return err;
+
+        err = radio_.setSyncWord( cfg_.sync_word, cfg_.sync_word_len );
         if ( err != RADIOLIB_ERR_NONE ) return err;
 
         // Re-apply output power with PA boost flag for the HCW variant.

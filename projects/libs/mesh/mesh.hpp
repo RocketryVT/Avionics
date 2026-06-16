@@ -42,10 +42,23 @@ private:
         uint16_t len = 0;
     };
 
-    static constexpr std::size_t QUEUE_DEPTH = 16;
-    static constexpr std::size_t RX_QUEUE_DEPTH = 8;
-    static constexpr std::size_t DEDUPE_BUCKETS = 16;
-    static constexpr std::size_t DEDUPE_WAYS = 4;
+#ifndef SIGMA2_MESH_QUEUE_DEPTH
+#define SIGMA2_MESH_QUEUE_DEPTH 16
+#endif
+#ifndef SIGMA2_MESH_RX_QUEUE_DEPTH
+#define SIGMA2_MESH_RX_QUEUE_DEPTH 8
+#endif
+#ifndef SIGMA2_MESH_DEDUPE_BUCKETS
+#define SIGMA2_MESH_DEDUPE_BUCKETS 16
+#endif
+#ifndef SIGMA2_MESH_DEDUPE_WAYS
+#define SIGMA2_MESH_DEDUPE_WAYS 4
+#endif
+
+    static constexpr std::size_t QUEUE_DEPTH = SIGMA2_MESH_QUEUE_DEPTH;
+    static constexpr std::size_t RX_QUEUE_DEPTH = SIGMA2_MESH_RX_QUEUE_DEPTH;
+    static constexpr std::size_t DEDUPE_BUCKETS = SIGMA2_MESH_DEDUPE_BUCKETS;
+    static constexpr std::size_t DEDUPE_WAYS = SIGMA2_MESH_DEDUPE_WAYS;
 
     struct SeenFrame {
         bool valid = false;
