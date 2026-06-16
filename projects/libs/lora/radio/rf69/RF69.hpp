@@ -31,6 +31,7 @@ struct Config {
     uint8_t sync_word[2] = { 0x2D, 0x01 };
     uint8_t sync_word_len = 2;
     uint8_t fixed_len = 64;
+    uint8_t data_shaping = RADIOLIB_SHAPING_0_5;
 };
 
 // -- Driver --------------------------------------------------------------------
@@ -52,6 +53,8 @@ public:
         , dio0_( dio0 )
     {}
 
+    const char* init_stage() const { return init_stage_; }
+
     int begin() override
     {
         const int8_t init_power =
@@ -65,25 +68,33 @@ public:
         config.power              = init_power;
         config.preambleLength     = cfg_.preamble;
 
+        init_stage_ = "begin";
         int err = radio_.begin( config );
         if ( err != RADIOLIB_ERR_NONE ) return err;
 
-        err = radio_.setSyncWord( cfg_.sync_word, cfg_.sync_word_len );
+        init_stage_ = "setSyncWord";
+        err = radio_.setSyncWord(
+            static_cast<const uint8_t*>( cfg_.sync_word ), cfg_.sync_word_len, 0 );
         if ( err != RADIOLIB_ERR_NONE ) return err;
 
+        init_stage_ = "fixedPacketLengthMode";
         err = radio_.fixedPacketLengthMode( cfg_.fixed_len );
+        if ( err != RADIOLIB_ERR_NONE ) return err;
+
+        init_stage_ = "setDataShaping";
+        err = radio_.setDataShaping( cfg_.data_shaping );
         if ( err != RADIOLIB_ERR_NONE ) return err;
 
         // Re-apply output power with PA boost flag for the HCW variant.
         // begin() sets power without the flag; this corrects the PA registers.
         if ( cfg_.high_power ) {
+            init_stage_ = "setOutputPowerHigh";
             err = radio_.setOutputPower( cfg_.tx_dbm, true );
-            if ( err == RADIOLIB_ERR_NONE && init_power != cfg_.tx_dbm ) {
-                err = radio_.setOutputPower( cfg_.tx_dbm, true );
-            }
+            if ( err != RADIOLIB_ERR_NONE ) return err;
         }
 
-        return err;
+        init_stage_ = "ready";
+        return RADIOLIB_ERR_NONE;
     }
 
     void start_receive() override { radio_.startReceive(); }
@@ -116,6 +127,7 @@ private:
     Module  module_;
     ::RF69  radio_;
     uint    dio0_;
+    const char* init_stage_ = "not-started";
 };
 
 } // namespace radio::rf69
