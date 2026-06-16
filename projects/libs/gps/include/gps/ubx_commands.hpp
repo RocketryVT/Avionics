@@ -428,13 +428,19 @@ inline void end(UbxFrame& f, std::size_t len_idx) noexcept {
     return raw_valset_u8(0x20910016u, rate, layers);
 }
 
+enum class FixMode : uint8_t {
+    TwoDOnly = 1,
+    ThreeDOnly = 2,
+    Auto = 3,
+};
+
 // --- CFG-NAVSPG-FIXMODE (key 0x20110011) -------------------------------------
 // 1=2D only  2=3D only  3=auto (default)
 [[nodiscard]] inline UbxFrame valset_fix_mode(
-    uint8_t mode = 3,
+    FixMode mode = FixMode::Auto,
     ValLayer layers = ValLayer::RAM | ValLayer::BBR | ValLayer::Flash) noexcept
 {
-    return raw_valset_u8(0x20110011u, mode, layers);
+    return raw_valset_u8(0x20110011u, static_cast<uint8_t>(mode), layers);
 }
 
 enum class DynModel : uint8_t {

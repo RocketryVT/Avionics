@@ -291,6 +291,7 @@ private:
         coord_.hdop       = f8 ? ::strtof(f8, nullptr) : 0.0f;
         coord_.fix_type   = FixType::Fix3D;
         coord_.valid      = true;
+        coord_.fix_seq++;    // fresh valid solution — see Coordinate::fix_seq
         update_nmea_velocity(lat, lon, coord_.altitude, coord_.utc_ms);
     }
 
@@ -330,6 +331,7 @@ private:
         coord_.speed_mps  = f7 ? ::strtof(f7, nullptr) * 0.514444f : 0.0f;
         coord_.course_deg = f8 ? ::strtof(f8, nullptr)              : 0.0f;
         coord_.valid      = true;
+        coord_.fix_seq++;    // fresh valid solution — see Coordinate::fix_seq
         update_nmea_velocity(lat, lon, coord_.altitude, coord_.utc_ms);
 
         // Date field: ddmmyy
@@ -348,7 +350,7 @@ private:
         if (f12) {
             const char mode = f12[0];
             if (mode == 'A' || mode == 'D' || mode == 'E' || mode == 'N')
-                coord_.fix_mode = static_cast<FixMode>(static_cast<uint8_t>(mode));
+                coord_.fix_mode = static_cast<RMCFixMode>(static_cast<uint8_t>(mode));
         }
     }
 };

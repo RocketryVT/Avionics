@@ -73,7 +73,7 @@ enum class FixQuality : uint8_t {
 };
 
 // NMEA RMC positioning mode (field 12).
-enum class FixMode : uint8_t {
+enum class RMCFixMode : uint8_t {
     None         = 'N',
     Autonomous   = 'A',
     Differential = 'D',
@@ -190,7 +190,7 @@ struct Coordinate {
     FixType         fix_type    = FixType::None;
     CarrierSolution carr_soln   = CarrierSolution::None;
     FixQuality      fix_quality = FixQuality::Invalid;
-    FixMode         fix_mode    = FixMode::None;
+    RMCFixMode         fix_mode    = RMCFixMode::None;
 
     // Dilution of precision
     float    hdop         = 0.0f;   // horizontal DOP (NMEA GGA or UBX NAV-DOP)
@@ -201,6 +201,18 @@ struct Coordinate {
     int      satellites   = 0;
     uint8_t  best_cno     = 0;      // highest C/N0 among tracked SVs, dBHz
     uint8_t  num_sv_used  = 0;      // count of SVs flagged svUsed
+
+    // Freshness / staleness
+    //
+    // Incremented once for every fresh valid position solution committed by
+    // either parser.  All other fields hold their *last-known* values between
+    // solutions (they are never cleared on loss of fix), so this counter is the
+    // only reliable "is this new?" signal: if it stops advancing, the lat/lon/
+    // alt above are stale and should not be trusted as a live position.
+    //
+    // Consumers that have a clock should record the time fix_seq last changed
+    // and treat the data as stale past some max age (see PicoGpsDriver::is_stale).
+    uint32_t fix_seq      = 0;
 };
 
 // ===============================================================================

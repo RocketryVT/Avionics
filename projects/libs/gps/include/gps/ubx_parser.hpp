@@ -253,6 +253,7 @@ private:
         coord_.speed_mps     = static_cast<float>(pvt.gSpeed)  * 0.001f;
         coord_.course_deg    = static_cast<float>(pvt.headMot) * 1e-5f;
         coord_.valid         = true;
+        coord_.fix_seq++;    // fresh valid solution — see Coordinate::fix_seq
     }
 
     // -- NAV-HPPOSLLH ---------------------------------------------------------

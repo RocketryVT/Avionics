@@ -346,6 +346,12 @@ public:
     [[nodiscard]] bool               has_fix()       const noexcept { return coord_.valid; }
     [[nodiscard]] const Diagnostics& diagnostics()   const noexcept { return diag_; }
 
+    // Monotonic count of fresh valid solutions. If this stops advancing between
+    // polls, coordinate() is stale — the position fields still hold their last
+    // value but no longer reflect a live fix. Consumers with a clock can record
+    // the time this last changed to compute an age (see PicoGpsDriver::is_stale).
+    [[nodiscard]] uint32_t           fix_seq()       const noexcept { return coord_.fix_seq; }
+
     [[nodiscard]] std::string_view   fix_label()     const noexcept {
         return gps::fix_label(coord_);
     }
@@ -808,17 +814,40 @@ public:
     }
 
     void send_ubx(const UbxFrame& frame) noexcept { driver_.send_ubx(frame); }
-    std::size_t poll() noexcept { return driver_.poll(); }
-    std::size_t poll_ubx_only() noexcept { return driver_.poll_ubx_only(); }
+    std::size_t poll() noexcept { const std::size_t n = driver_.poll(); note_freshness(); return n; }
+    std::size_t poll_ubx_only() noexcept { const std::size_t n = driver_.poll_ubx_only(); note_freshness(); return n; }
     std::size_t read_raw(uint8_t* buf, std::size_t len) noexcept { return driver_.read_raw(buf, len); }
-    void feed(uint8_t b) noexcept { driver_.feed(b); }
-    void feed(const uint8_t* data, std::size_t len) noexcept { driver_.feed(data, len); }
-    void feed_ubx_only(const uint8_t* data, std::size_t len) noexcept { driver_.feed_ubx_only(data, len); }
+    void feed(uint8_t b) noexcept { driver_.feed(b); note_freshness(); }
+    void feed(const uint8_t* data, std::size_t len) noexcept { driver_.feed(data, len); note_freshness(); }
+    void feed_ubx_only(const uint8_t* data, std::size_t len) noexcept { driver_.feed_ubx_only(data, len); note_freshness(); }
 
     [[nodiscard]] const Coordinate& coordinate() const noexcept { return driver_.coordinate(); }
     [[nodiscard]] bool has_fix() const noexcept { return driver_.has_fix(); }
     [[nodiscard]] const Diagnostics& diagnostics() const noexcept { return driver_.diagnostics(); }
     [[nodiscard]] std::string_view fix_label() const noexcept { return driver_.fix_label(); }
+
+    // -- Freshness / staleness -------------------------------------------------
+    // A fix is "fresh" while new valid solutions keep arriving; coordinate()
+    // always returns the last-known position, so use these to decide whether it
+    // can still be trusted as live before acting on or transmitting it.
+
+    [[nodiscard]] uint32_t fix_seq() const noexcept { return driver_.fix_seq(); }
+
+    // Whether at least one valid fix has been seen since construction.
+    [[nodiscard]] bool ever_had_fix() const noexcept { return ever_fix_; }
+
+    // Milliseconds since the last fresh valid solution. UINT32_MAX if no fix yet.
+    [[nodiscard]] uint32_t fix_age_ms() const noexcept {
+        if (!ever_fix_) return UINT32_MAX;
+        const uint64_t dt_ms = (time_us_64() - last_fix_us_) / 1000u;
+        return (dt_ms > UINT32_MAX) ? UINT32_MAX : static_cast<uint32_t>(dt_ms);
+    }
+
+    // True when there is no fix yet or the last one is older than max_age_ms.
+    // Default 2 s ≈ two missed 1 Hz solutions.
+    [[nodiscard]] bool is_stale(uint32_t max_age_ms = 2000u) const noexcept {
+        return fix_age_ms() > max_age_ms;
+    }
 
 private:
     UartTransport transport_;
@@ -831,6 +860,21 @@ private:
     bool rx_mode_ok_ = false;
     UartRxMode configured_rx_mode_ = UartRxMode::Polling;
     DmaRingBufferSize configured_dma_ring_size_ = DmaRingBufferSize::Bytes1K;
+
+    // Freshness tracking — timestamp the wall clock whenever a new valid fix
+    // (advancing fix_seq) is committed by a poll/feed call.
+    uint32_t last_seen_seq_ = 0;
+    uint64_t last_fix_us_   = 0;
+    bool     ever_fix_      = false;
+
+    void note_freshness() noexcept {
+        const uint32_t seq = driver_.fix_seq();
+        if (seq != last_seen_seq_) {
+            last_seen_seq_ = seq;
+            last_fix_us_   = time_us_64();
+            ever_fix_      = true;
+        }
+    }
 
     void set_host_baudrate(uint32_t baud) noexcept {
         transport_.set_baudrate(baud);
