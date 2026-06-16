@@ -30,6 +30,7 @@ struct Config {
     uint8_t preamble   = 16;      // preamble length in bits
     uint8_t sync_word[2] = { 0x2D, 0x01 };
     uint8_t sync_word_len = 2;
+    uint8_t fixed_len = 64;
 };
 
 // -- Driver --------------------------------------------------------------------
@@ -70,6 +71,9 @@ public:
         err = radio_.setSyncWord( cfg_.sync_word, cfg_.sync_word_len );
         if ( err != RADIOLIB_ERR_NONE ) return err;
 
+        err = radio_.fixedPacketLengthMode( cfg_.fixed_len );
+        if ( err != RADIOLIB_ERR_NONE ) return err;
+
         // Re-apply output power with PA boost flag for the HCW variant.
         // begin() sets power without the flag; this corrects the PA registers.
         if ( cfg_.high_power ) {
@@ -91,11 +95,14 @@ public:
     {
         std::memset( &pkt, 0, sizeof(pkt) );
 
-        size_t len = static_cast<size_t>( radio_.getPacketLength() );
+        size_t len = cfg_.fixed_len ? cfg_.fixed_len : static_cast<size_t>( radio_.getPacketLength() );
         if ( len > MAX_PACKET ) len = MAX_PACKET;
 
         const int err = radio_.readData( pkt.data, len );
         if ( err == RADIOLIB_ERR_NONE ) {
+            while ( len > 0 && pkt.data[len - 1] == 0u ) {
+                --len;
+            }
             pkt.len  = static_cast<uint8_t>( len );
             pkt.rssi = radio_.getRSSI();
             pkt.snr  = 0.0f;  // FSK has no SNR
