@@ -212,9 +212,9 @@ lr11xx_hal_status_t lr11xx_hal_reset( const void* context )
     xSemaphoreTake( ctx->_mutex, portMAX_DELAY );
 
     gpio_put( ctx->pin_nreset, 0 );
-    vTaskDelay( pdMS_TO_TICKS( 5 ) );
+    vTaskDelay( pdMS_TO_TICKS( 20 ) );
     gpio_put( ctx->pin_nreset, 1 );
-    vTaskDelay( pdMS_TO_TICKS( 10 ) );
+    vTaskDelay( pdMS_TO_TICKS( 100 ) );
 
     lr11xx_hal_status_t status = wait_busy( ctx );
 

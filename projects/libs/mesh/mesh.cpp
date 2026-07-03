@@ -142,6 +142,10 @@ void Mesh::tick_1hz(const SIGMA2::MeshSnapshot& snapshot)
         enqueue_gps_nav(snapshot.gps, snapshot.boot_ms);
     }
 
+    if (snapshot.have_baro) {
+        enqueue_baro(snapshot.baro, snapshot.boot_ms);
+    }
+
     if (snapshot.have_gps &&
         config_.time_sync_period_ticks != 0u &&
         (tick_count_ % config_.time_sync_period_ticks) == 0u) {
@@ -375,6 +379,24 @@ void Mesh::enqueue_gps_nav(const SIGMA2::GpsFix& gps, uint32_t boot_ms)
     uint8_t frame[SIGMA2::MAX_FRAME];
     const std::size_t n = serializer_.serialize_packet(
         gn,
+        config_.default_destination,
+        frame,
+        sizeof(frame),
+        boot_ms);
+    enqueue(frame, n);
+}
+
+void Mesh::enqueue_baro(const SIGMA2::BaroSample& baro, uint32_t boot_ms)
+{
+    SIGMA2::TRANSMIT_PACKETS::Barometer bp = {};
+    bp.altitude_cm = metres_to_cm(baro.altitude_m);
+    bp.pressure_pa = static_cast<int32_t>(baro.pressure_pa);
+    bp.temperature_cc = static_cast<int16_t>(baro.temperature_c * 100.0f);
+    bp.flags = baro.flags | SIGMA2::DATA_VALID_FLAG::BARO_VALID;
+
+    uint8_t frame[SIGMA2::MAX_FRAME];
+    const std::size_t n = serializer_.serialize_packet(
+        bp,
         config_.default_destination,
         frame,
         sizeof(frame),

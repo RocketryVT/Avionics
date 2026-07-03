@@ -93,6 +93,7 @@ private:
     bool forward_received(const SIGMA2::RadioRx& rx, const SIGMA2::DecodedFrame& decoded);
     void enqueue_nav_state(const SIGMA2::NavSnapshot& nav, uint32_t boot_ms);
     void enqueue_gps_nav(const SIGMA2::GpsFix& gps, uint32_t boot_ms);
+    void enqueue_baro(const SIGMA2::BaroSample& baro, uint32_t boot_ms);
     void enqueue_time_sync(const SIGMA2::GpsFix& gps, uint32_t boot_ms);
 };
 

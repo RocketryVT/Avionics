@@ -128,7 +128,7 @@ enum class DeviceType : uint8_t {
 };
 
 struct RadioConfig {
-    float freq_mhz = 915.0f;
+    float freq_mhz = 904.5f;
     float bandwidth_khz = 125.0f;
     uint8_t spreading_factor = 7;
     uint8_t coding_rate = 7;
@@ -186,11 +186,20 @@ struct NavSnapshot {
     uint8_t flags = 0;
 };
 
+struct BaroSample {
+    float pressure_pa = 0.0f;
+    float temperature_c = 0.0f;
+    float altitude_m = 0.0f;
+    uint8_t flags = 0;
+};
+
 struct MeshSnapshot {
     bool have_gps = false;
     GpsFix gps = {};
     bool have_nav = false;
     NavSnapshot nav = {};
+    bool have_baro = false;
+    BaroSample baro = {};
     uint32_t boot_ms = 0;
 };
 

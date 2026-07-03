@@ -206,5 +206,43 @@ namespace SIGMA2 {
             }
         };
 
+        // --------- Barometer Packet --------- //
+
+        struct Barometer {
+            static constexpr PacketType TYPE = PacketType::BARO;
+
+            int32_t altitude_cm    = 0;  // barometric altitude [cm]
+            int32_t pressure_pa    = 0;  // absolute pressure [Pa]
+            int16_t temperature_cc = 0;  // temperature [°C * 100]
+            uint8_t flags          = 0;  // bitmask of DATA_VALID_FLAG
+
+            static constexpr size_t WIRE_SIZE =
+                sizeof(int32_t) + sizeof(int32_t) + sizeof(int16_t) + sizeof(uint8_t);
+
+            bool serialize(uint8_t* buf, size_t len) const {
+                if (!buf || len < WIRE_SIZE) {
+                    return false;
+                }
+                size_t i = 0;
+                wire::write_u32_le(buf, i, static_cast<uint32_t>(altitude_cm));
+                wire::write_u32_le(buf, i, static_cast<uint32_t>(pressure_pa));
+                wire::write_u16_le(buf, i, static_cast<uint16_t>(temperature_cc));
+                buf[i++] = flags;
+                return true;
+            }
+
+            static bool deserialize(const uint8_t* buf, size_t len, Barometer& out) {
+                if (!buf || len < WIRE_SIZE) {
+                    return false;
+                }
+                size_t i = 0;
+                out.altitude_cm = static_cast<int32_t>(wire::read_u32_le(buf, i));
+                out.pressure_pa = static_cast<int32_t>(wire::read_u32_le(buf, i));
+                out.temperature_cc = static_cast<int16_t>(wire::read_u16_le(buf, i));
+                out.flags = buf[i++];
+                return true;
+            }
+        };
+
     };
 };

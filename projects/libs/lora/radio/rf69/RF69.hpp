@@ -32,6 +32,7 @@ struct Config {
     uint8_t sync_word_len = 2;
     uint8_t fixed_len = 64;
     uint8_t data_shaping = RADIOLIB_SHAPING_0_5;
+    bool    afc = false;          // auto frequency correction on each RX entry
 };
 
 // -- Driver --------------------------------------------------------------------
@@ -90,6 +91,22 @@ public:
         if ( cfg_.high_power ) {
             init_stage_ = "setOutputPowerHigh";
             err = radio_.setOutputPower( cfg_.tx_dbm, true );
+            if ( err != RADIOLIB_ERR_NONE ) return err;
+        }
+
+        // Optional automatic frequency correction. With a narrow RX bandwidth,
+        // RFM69 crystal tolerance (~±20 ppm ≈ ±8.5 kHz @ 424.5 MHz, per end)
+        // can walk the signal off-centre. Auto-AFC measures the offset during
+        // the preamble each time RX starts and re-centres the receiver, so the
+        // narrow RxBw can be used without losing the packet. AfcBw is left at
+        // the chip default (50 kHz → ±25 kHz capture, covers the combined
+        // crystal spread). AUTOCLEAR resets the correction every RX entry.
+        if ( cfg_.afc ) {
+            init_stage_ = "afc";
+            err = module_.SPIsetRegValue(
+                RADIOLIB_RF69_REG_AFC_FEI,
+                RADIOLIB_RF69_AFC_AUTO_ON | RADIOLIB_RF69_AFC_AUTOCLEAR_ON,
+                3, 2 );
             if ( err != RADIOLIB_ERR_NONE ) return err;
         }
 

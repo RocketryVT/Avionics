@@ -8,13 +8,23 @@
 
 namespace Pins {
 
-// -- SX1276 LoRa, SPI1 --------------------------------------------------------
+// -- External SX1276 LoRa breakout, SPI1 (legacy; firmware now uses LR1121) ---
 static constexpr unsigned LR_SCK     = 26;
 static constexpr unsigned LR_MOSI    = 27;
 static constexpr unsigned LR_MISO    = 28;
 static constexpr unsigned LR_NSS     = 29;
 static constexpr unsigned LR_DIO0    = 22;  // TxDone / RxDone interrupt
 static constexpr unsigned LR_NRESET  = 23;
+
+// -- Onboard Semtech LR1121, SPI0 ---------------------------------------------
+// Confirmed against the working bringup sketch (lora_reference/LoRa_Tracker_Code.cpp).
+// BUSY/NRESET are LR11xx-specific; status is polled over SPI (no DIO IRQ GPIO).
+static constexpr unsigned LR1121_SCK    = 6;
+static constexpr unsigned LR1121_MOSI   = 7;
+static constexpr unsigned LR1121_MISO   = 4;
+static constexpr unsigned LR1121_NSS    = 5;
+static constexpr unsigned LR1121_BUSY   = 0;
+static constexpr unsigned LR1121_NRESET = 1;
 
 // Canonical radio vocabulary used by board-neutral code.
 static constexpr unsigned LORA0_SCK  = LR_SCK;

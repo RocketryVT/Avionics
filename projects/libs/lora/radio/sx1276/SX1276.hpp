@@ -21,7 +21,7 @@ namespace radio::sx1276 {
 // -- Configuration -------------------------------------------------------------
 
 struct Config {
-    float    freq_mhz  = 915.0f;
+    float    freq_mhz  = 904.5f;
     float    bw_khz    = 125.0f;
     uint8_t  sf        = 7;        // spreading factor 6–12
     uint8_t  cr        = 5;        // coding rate denominator 5–8
